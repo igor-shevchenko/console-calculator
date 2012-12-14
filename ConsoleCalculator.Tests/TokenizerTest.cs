@@ -33,7 +33,7 @@ namespace ConsoleCalculator.Tests
 
             var result = tokenizer.GetTokensFrom("-1+(-2)").ToList();
 
-            CollectionAssert.AreEqual(new[] { "-1", "+", "(", "-2", ")" }, result);
+            CollectionAssert.AreEqual(new[] { "-", "1", "+", "(", "-", "2", ")" }, result);
         }
 
         [Test]
@@ -41,9 +41,9 @@ namespace ConsoleCalculator.Tests
         {
             var tokenizer = new Tokenizer();
 
-            var result = tokenizer.GetTokensFrom("1+(((2+3)+4)+5)").ToList();
+            var result = tokenizer.GetTokensFrom("1+(((2*3)/4)-5)").ToList();
 
-            CollectionAssert.AreEqual(new[] { "1", "+", "(", "(", "(", "2", "+", "3", ")", "+", "4", ")", "+", "5", ")" },
+            CollectionAssert.AreEqual(new[] { "1", "+", "(", "(", "(", "2", "*", "3", ")", "/", "4", ")", "-", "5", ")" },
                 result);
         }
     }
