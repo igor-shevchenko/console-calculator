@@ -115,5 +115,27 @@ namespace ConsoleCalculator.Tests
 
             Assert.AreEqual(true, result); 
         }
+
+        [Test]
+        public void NotValidateTwoOperators()
+        {
+            var invalidTokens = new List<string> { "1", "+", "-", "2" };
+            var validator = new ExpressionValidator();
+
+            var result = validator.Validate(invalidTokens);
+
+            Assert.AreEqual(false, result);
+        }
+
+        [Test]
+        public void NotValidateBracketsWithOperatorOnly()
+        {
+            var invalidTokens = new List<string> { "1", "+", "(", "-", ")" };
+            var validator = new ExpressionValidator();
+
+            var result = validator.Validate(invalidTokens);
+
+            Assert.AreEqual(false, result);
+        }
     }
 }

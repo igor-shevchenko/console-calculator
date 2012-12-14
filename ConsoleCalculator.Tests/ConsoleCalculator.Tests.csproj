@@ -55,7 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenizerTest.cs" />
-    <Compile Include="ValidatorTest.cs" />
+    <Compile Include="ExpressionValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConsoleCalculator\ConsoleCalculator.csproj">
