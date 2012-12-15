@@ -48,7 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionValidator.cs" />
+    <Compile Include="Operations\AdditionOperator.cs" />
+    <Compile Include="Operations\DivisionOperator.cs" />
+    <Compile Include="Operations\IBinaryOperator.cs" />
     <Compile Include="ITokenizer.cs" />
+    <Compile Include="Operations\IUnaryOperator.cs" />
+    <Compile Include="Operations\MultiplicationOperator.cs" />
+    <Compile Include="Operations\NegationOperator.cs" />
+    <Compile Include="Operations\SubtractionOperator.cs" />
+    <Compile Include="OperatorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokenizer.cs" />
