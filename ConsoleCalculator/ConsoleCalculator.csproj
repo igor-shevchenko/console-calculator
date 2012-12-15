@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bracket.cs" />
-    <Compile Include="ExpressionValidator.cs" />
+    <Compile Include="Tree\ExpressionTree.cs" />
+    <Compile Include="Tree\IExpressionTree.cs" />
+    <Compile Include="Tokenizer.cs" />
     <Compile Include="Operations\AdditionOperator.cs" />
     <Compile Include="Operations\DivisionOperator.cs" />
     <Compile Include="Operations\IBinaryOperator.cs" />
