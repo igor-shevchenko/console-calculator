@@ -9,59 +9,59 @@ namespace ConsoleCalculator
         private readonly IBinaryOperator binaryOperator;
         private readonly IUnaryOperator unaryOperator;
         private readonly Bracket bracket;
-        private readonly bool isValue;
-        private readonly bool isBinaryOperator;
-        private readonly bool isUnaryOperator;
-        private readonly bool isBracket;
+        public readonly bool IsValue;
+        public readonly bool IsBinaryOperator;
+        public readonly bool IsUnaryOperator;
+        public readonly bool IsBracket;
 
         public Token(double value)
         {
             this.value = value;
-            isValue = true;
+            IsValue = true;
         }
 
         public Token(IBinaryOperator binaryOperator)
         {
             this.binaryOperator = binaryOperator;
-            isBinaryOperator = true;
+            IsBinaryOperator = true;
         }
 
         public Token(IUnaryOperator unaryOperator)
         {
             this.unaryOperator = unaryOperator;
-            isUnaryOperator = true;
+            IsUnaryOperator = true;
         }
 
         public Token (Bracket bracket)
         {
             this.bracket = bracket;
-            isBracket = true;
+            IsBracket = true;
         }
 
         public double GetValue()
         {
-            if (!isValue)
+            if (!IsValue)
                 throw new Exception();
             return value;
         }
 
         public IBinaryOperator GetBinaryOperator()
         {
-            if (!isBinaryOperator)
+            if (!IsBinaryOperator)
                 throw new Exception();
             return binaryOperator;
         }
 
         public IUnaryOperator GetUnaryOperator()
         {
-            if (!isUnaryOperator)
+            if (!IsUnaryOperator)
                 throw new Exception();
             return unaryOperator;
         }
 
         public Bracket GetBracket()
         {
-            if (!isBracket)
+            if (!IsBracket)
                 throw new Exception();
             return bracket;
         }
