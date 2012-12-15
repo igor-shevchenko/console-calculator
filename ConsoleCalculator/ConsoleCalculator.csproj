@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bracket.cs" />
+    <Compile Include="Calculator.cs" />
     <Compile Include="IOperatorFactory.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
