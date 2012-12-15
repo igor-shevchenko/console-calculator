@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace ConsoleCalculator.Tree
 {
-    public class ExpressionTreeBuilder
+    public class ExpressionTreeBuilder : IExpressionTreeBuilder
     {
         public ExpressionTree Build(List<Token> tokens)
         {

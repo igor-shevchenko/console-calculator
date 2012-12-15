@@ -3,7 +3,7 @@ using ConsoleCalculator.Operations;
 
 namespace ConsoleCalculator
 {
-    public class OperatorFactory
+    public class OperatorFactory : IOperatorFactory
     {
         public IBinaryOperator GetBinaryOperator(string sign)
         {

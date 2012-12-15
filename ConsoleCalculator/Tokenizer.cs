@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleCalculator
 {
-    public class Tokenizer
+    public class Tokenizer : ITokenizer
     {
         private readonly List<string> infixOperations = new List<string> { "+", "-", "*", "/" };
         private readonly List<string> prefixOperations = new List<string> { "-" };
