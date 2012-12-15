@@ -3,46 +3,58 @@ using System.Collections.Generic;
 
 namespace ConsoleCalculator
 {
-    public class ExpressionValidator
+    public class Tokenizer
     {
         private readonly List<string> infixOperations = new List<string> { "+", "-", "*", "/" };
         private readonly List<string> prefixOperations = new List<string> { "-" };
         private readonly List<string> brackets = new List<string> { "(", ")" };
 
-        public bool Validate(List<string> tokens)
+        public IEnumerable<Token> Tokenize(List<string> tokens)
         {
+            var factory = new OperatorFactory();
             var openedBracketsCount = 0;
             for (var i = 0; i < tokens.Count; ++i)
             {
                 var token = tokens[i];
                 double n;
-                if (IsPrefixOperation(tokens, i) ||
-                    IsInfixOperation(tokens, i) ||
-                    Double.TryParse(token, out n))
+                if (IsPrefixOperation(tokens, i))
                 {
-                    continue;
+                    yield return new Token(factory.GetUnaryOperator(token)); 
+                } 
+                else if (IsInfixOperation(tokens, i))
+                {
+                    yield return new Token(factory.GetBinaryOperator(token));
+                } 
+                else if (Double.TryParse(token, out n))
+                {
+                    yield return new Token(n);
                 }
-                if (brackets.Contains(token))
+                else if (brackets.Contains(token))
                 {
                     if (token == brackets[0])
                     {
                         openedBracketsCount++;
                         if (!AreBracketsEmpty(tokens, i))
                         {
-                            return false;
+                            throw new ArgumentException("Empty brackets");
                         }
+                        yield return new Token(Bracket.Opening);
                     }
                     else
                     {
                         openedBracketsCount--;
                         if (openedBracketsCount < 0)
-                            return false;
+                            throw new ArgumentException("Unbalanced brackets");
+                        yield return new Token(Bracket.Closing);
                     }
-                    continue;
                 }
-                return false;
+                else
+                {
+                    throw new ArgumentException("Unknown token");
+                }
             }
-            return openedBracketsCount == 0;
+            if (openedBracketsCount != 0)
+                throw new ArgumentException("Unbalanced brackets");
         }
 
         private bool AreBracketsEmpty(List<string> tokens, int position)

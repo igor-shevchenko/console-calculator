@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bracket.cs" />
     <Compile Include="ExpressionValidator.cs" />
     <Compile Include="Operations\AdditionOperator.cs" />
     <Compile Include="Operations\DivisionOperator.cs" />
