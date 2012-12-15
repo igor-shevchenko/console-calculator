@@ -27,10 +27,6 @@ namespace ConsoleCalculator
                         double result = calculator.Calculate(command);
                         Console.WriteLine(result);
                     }
-                    catch (DivideByZeroException)
-                    {
-                        Console.WriteLine("Division by zero exception");
-                    }
                     catch (Exception)
                     {
                         Console.WriteLine("Syntax error");
