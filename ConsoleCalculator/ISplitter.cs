@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ConsoleCalculator
 {
-    interface ISplitter
+    public interface ISplitter
     {
         IEnumerable<string> Split(string s);
     }
