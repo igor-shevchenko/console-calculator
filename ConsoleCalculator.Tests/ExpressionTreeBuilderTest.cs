@@ -87,5 +87,27 @@ namespace ConsoleCalculator.Tests
             Assert.AreEqual(tree.Children[1].Children[0].Token, tokens[2]);
             Assert.AreEqual(tree.Children[1].Children[1].Token, tokens[4]);
         }
+
+        [Test]
+        public void TestBuildWithRightAssociativity()
+        {
+            var tokens = new List<Token>
+                             {
+                                 new Token(1),
+                                 new Token(new SubtractionOperator()),
+                                 new Token(2),
+                                 new Token(new SubtractionOperator()),
+                                 new Token(3),
+                             };
+            var builder = new ExpressionTreeBuilder();
+
+            var tree = builder.Build(tokens);
+
+            Assert.AreEqual(tree.Token, tokens[3]);
+            Assert.AreEqual(tree.Children[0].Token, tokens[1]);
+            Assert.AreEqual(tree.Children[1].Token, tokens[4]);
+            Assert.AreEqual(tree.Children[0].Children[0].Token, tokens[0]);
+            Assert.AreEqual(tree.Children[0].Children[1].Token, tokens[2]);
+        }
     }
 }

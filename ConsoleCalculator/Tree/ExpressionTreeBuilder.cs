@@ -66,7 +66,7 @@ namespace ConsoleCalculator.Tree
 
                 if (token.IsBinaryOperator || token.IsUnaryOperator)
                 {
-                    if (leastIndex == -1 || GetOperatorPrecedence(token) < GetOperatorPrecedence(tokens[leastIndex]))
+                    if (leastIndex == -1 || GetOperatorPrecedence(token) <= GetOperatorPrecedence(tokens[leastIndex]))
                     {
                         leastIndex = i;
                     }
