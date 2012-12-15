@@ -6,30 +6,31 @@ namespace ConsoleCalculator.Tree
 {
     public class ExpressionTree : IExpressionTree
     {
-        private readonly Token token;
-        private readonly IList<IExpressionTree> children;
+        public Token Token { get; private set; }
+
+        public IList<IExpressionTree> Children { get; private set; }
 
         public ExpressionTree(Token token, IList<IExpressionTree> children)
         {
-            this.token = token;
-            this.children = children;
+            this.Token = token;
+            this.Children = children;
         }
 
         public double GetResult()
         {
-            if (token.IsValue)
-                return token.GetValue();
-            if (token.IsUnaryOperator)
+            if (Token.IsValue)
+                return Token.GetValue();
+            if (Token.IsUnaryOperator)
             {
-                var operation = token.GetUnaryOperator();
-                var childResult = children.First().GetResult();
+                var operation = Token.GetUnaryOperator();
+                var childResult = Children.First().GetResult();
                 return operation.Apply(childResult);
             }
-            if (token.IsBinaryOperator)
+            if (Token.IsBinaryOperator)
             {
-                var operation = token.GetBinaryOperator();
-                var leftChildResult = children[0].GetResult();
-                var rightChildResult = children[1].GetResult();
+                var operation = Token.GetBinaryOperator();
+                var leftChildResult = Children[0].GetResult();
+                var rightChildResult = Children[1].GetResult();
                 return operation.Apply(leftChildResult, rightChildResult);
             }
             throw new Exception();
