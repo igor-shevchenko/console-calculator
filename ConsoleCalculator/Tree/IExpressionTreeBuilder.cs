@@ -4,6 +4,6 @@ namespace ConsoleCalculator.Tree
 {
     public interface IExpressionTreeBuilder
     {
-        ExpressionTree Build(List<Token> tokens);
+        IExpressionTree Build(List<Token> tokens);
     }
 }

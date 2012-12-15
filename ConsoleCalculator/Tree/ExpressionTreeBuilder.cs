@@ -6,7 +6,7 @@ namespace ConsoleCalculator.Tree
 {
     public class ExpressionTreeBuilder : IExpressionTreeBuilder
     {
-        public ExpressionTree Build(List<Token> tokens)
+        public IExpressionTree Build(List<Token> tokens)
         {
             if (tokens.Count == 0)
                 return null;
