@@ -4,44 +4,44 @@ using ConsoleCalculator;
 namespace ConsoleCalculator.Tests
 {
     [TestFixture]
-    class TokenizerTest
+    class SplitterTest
     {
         [Test]
-        public void TokenizeString()
+        public void SplitString()
         {
-            var tokenizer = new Tokenizer();
+            var splitter = new Splitter();
 
-            var result = tokenizer.GetTokensFrom("1+2").ToList();
+            var result = splitter.Split("1+2").ToList();
 
             CollectionAssert.AreEqual(new [] {"1", "+", "2"}, result);
         }
 
         [Test]
-        public void TokenizeMultidigitNumbers()
+        public void SplitMultidigitNumbers()
         {
-            var tokenizer = new Tokenizer();
+            var splitter = new Splitter();
 
-            var result = tokenizer.GetTokensFrom("11+22").ToList();
+            var result = splitter.Split("11+22").ToList();
 
             CollectionAssert.AreEqual(new[] { "11", "+", "22" }, result);
         }
 
         [Test]
-        public void TokenizeNegativeNumbers()
+        public void SplitNegativeNumbers()
         {
-            var tokenizer = new Tokenizer();
+            var splitter = new Splitter();
 
-            var result = tokenizer.GetTokensFrom("-1+(-2)").ToList();
+            var result = splitter.Split("-1+(-2)").ToList();
 
             CollectionAssert.AreEqual(new[] { "-", "1", "+", "(", "-", "2", ")" }, result);
         }
 
         [Test]
-        public void TokenizeMultipleParentheses()
+        public void SplitMultipleBrackets()
         {
-            var tokenizer = new Tokenizer();
+            var splitter = new Splitter();
 
-            var result = tokenizer.GetTokensFrom("1+(((2*3)/4)-5)").ToList();
+            var result = splitter.Split("1+(((2*3)/4)-5)").ToList();
 
             CollectionAssert.AreEqual(new[] { "1", "+", "(", "(", "(", "2", "*", "3", ")", "/", "4", ")", "-", "5", ")" },
                 result);

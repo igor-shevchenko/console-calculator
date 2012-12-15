@@ -4,10 +4,10 @@ using System.Globalization;
 
 namespace ConsoleCalculator
 {
-    public class Tokenizer : ITokenizer
+    public class Splitter : ISplitter
     {
         private readonly List<char> separators = new List<char> {'+', '-', '*', '/', '(', ')'};
-        public IEnumerable<string> GetTokensFrom(string s)
+        public IEnumerable<string> Split(string s)
         {
             var accumulator = String.Empty;
             foreach (var t in s)

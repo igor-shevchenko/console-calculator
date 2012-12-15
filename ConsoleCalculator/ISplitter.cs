@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ConsoleCalculator
 {
-    interface ITokenizer
+    interface ISplitter
     {
-        IEnumerable<string> GetTokensFrom(string s);
+        IEnumerable<string> Split(string s);
     }
 }
