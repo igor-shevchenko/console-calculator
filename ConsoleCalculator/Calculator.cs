@@ -6,7 +6,7 @@ using ConsoleCalculator.Tree;
 
 namespace ConsoleCalculator
 {
-    public class Calculator
+    public class Calculator : ICalculator
     {
         private readonly ISplitter splitter;
         private readonly ITokenizer tokenizer;
