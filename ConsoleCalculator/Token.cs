@@ -8,9 +8,11 @@ namespace ConsoleCalculator
         private readonly double value;
         private readonly IBinaryOperator binaryOperator;
         private readonly IUnaryOperator unaryOperator;
+        private readonly Bracket bracket;
         private readonly bool isValue;
         private readonly bool isBinaryOperator;
         private readonly bool isUnaryOperator;
+        private readonly bool isBracket;
 
         public Token(double value)
         {
@@ -28,6 +30,12 @@ namespace ConsoleCalculator
         {
             this.unaryOperator = unaryOperator;
             isUnaryOperator = true;
+        }
+
+        public Token (Bracket bracket)
+        {
+            this.bracket = bracket;
+            isBracket = true;
         }
 
         public double GetValue()
@@ -49,6 +57,13 @@ namespace ConsoleCalculator
             if (!isUnaryOperator)
                 throw new Exception();
             return unaryOperator;
+        }
+
+        public Bracket GetBracket()
+        {
+            if (!isBracket)
+                throw new Exception();
+            return bracket;
         }
     }
 }
