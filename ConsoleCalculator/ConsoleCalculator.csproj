@@ -51,19 +51,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bracket.cs" />
-    <Compile Include="BracketSignProvider.cs" />
+    <Compile Include="BracketSignDetector.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="ContainerFactory.cs" />
-    <Compile Include="IBracketSignProvider.cs" />
+    <Compile Include="IBracketSignDetector.cs" />
     <Compile Include="ICalculator.cs" />
     <Compile Include="IOperatorFactory.cs" />
-    <Compile Include="IOperationSignProvider.cs" />
-    <Compile Include="ISeparatorProvider.cs" />
+    <Compile Include="IOperationSignDetector.cs" />
+    <Compile Include="ISeparatorDetector.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />
-    <Compile Include="OperationSignProvider.cs" />
-    <Compile Include="SeparatorProvider.cs" />
+    <Compile Include="OperationSignDetector.cs" />
+    <Compile Include="SeparatorDetector.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
     <Compile Include="Tree\ExpressionTreeBuilder.cs" />
     <Compile Include="Tree\IExpressionTree.cs" />
