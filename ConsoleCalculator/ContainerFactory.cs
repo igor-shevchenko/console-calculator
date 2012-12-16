@@ -1,5 +1,6 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using ConsoleCalculator.Operations;
 using ConsoleCalculator.Tree;
 
 namespace ConsoleCalculator
@@ -14,6 +15,10 @@ namespace ConsoleCalculator
             container.Register(Component.For<IExpressionTreeBuilder>().ImplementedBy<ExpressionTreeBuilder>());
             container.Register(Component.For<IOperatorFactory>().ImplementedBy<OperatorFactory>());
             container.Register(Component.For<ICalculator>().ImplementedBy<Calculator>());
+            container.Register(Component.For<IOperatorListFactory>().ImplementedBy<OperatorListFactory>());
+            container.Register(Component.For<IOperationSignProvider>().ImplementedBy<OperationSignProvider>());
+            container.Register(Component.For<IBracketSignProvider>().ImplementedBy<BracketSignProvider>());
+            container.Register(Component.For<ISeparatorProvider>().ImplementedBy<SeparatorProvider>());
             return container;
         }
     }
