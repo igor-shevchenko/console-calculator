@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ConsoleCalculator
 {
-    public interface IOperationSignProvider
+    public interface IOperationSignDetector
     {
         bool IsBinaryOperator(string sign);
         bool IsUnaryOperator(string sign);

@@ -1,6 +1,6 @@
 namespace ConsoleCalculator
 {
-    class BracketSignProvider : IBracketSignProvider
+    class BracketSignDetector : IBracketSignDetector
     {
         public bool IsOpeningBracket(string sign)
         {

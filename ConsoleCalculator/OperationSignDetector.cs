@@ -4,11 +4,11 @@ using ConsoleCalculator.Operations;
 
 namespace ConsoleCalculator
 {
-    public class OperationSignProvider : IOperationSignProvider
+    public class OperationSignDetector : IOperationSignDetector
     {
         private readonly IOperatorListFactory factory;
 
-        public OperationSignProvider(IOperatorListFactory factory)
+        public OperationSignDetector(IOperatorListFactory factory)
         {
             this.factory = factory;
         }

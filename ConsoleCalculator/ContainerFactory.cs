@@ -16,9 +16,9 @@ namespace ConsoleCalculator
             container.Register(Component.For<IOperatorFactory>().ImplementedBy<OperatorFactory>());
             container.Register(Component.For<ICalculator>().ImplementedBy<Calculator>());
             container.Register(Component.For<IOperatorListFactory>().ImplementedBy<OperatorListFactory>());
-            container.Register(Component.For<IOperationSignProvider>().ImplementedBy<OperationSignProvider>());
-            container.Register(Component.For<IBracketSignProvider>().ImplementedBy<BracketSignProvider>());
-            container.Register(Component.For<ISeparatorProvider>().ImplementedBy<SeparatorProvider>());
+            container.Register(Component.For<IOperationSignDetector>().ImplementedBy<OperationSignDetector>());
+            container.Register(Component.For<IBracketSignDetector>().ImplementedBy<BracketSignDetector>());
+            container.Register(Component.For<ISeparatorDetector>().ImplementedBy<SeparatorDetector>());
             return container;
         }
     }

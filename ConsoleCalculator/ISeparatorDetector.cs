@@ -1,6 +1,6 @@
 namespace ConsoleCalculator
 {
-    public interface ISeparatorProvider
+    public interface ISeparatorDetector
     {
         bool IsSeparator(string sign);
     }

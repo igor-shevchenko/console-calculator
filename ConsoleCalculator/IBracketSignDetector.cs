@@ -1,6 +1,6 @@
 namespace ConsoleCalculator
 {
-    public interface IBracketSignProvider
+    public interface IBracketSignDetector
     {
         bool IsOpeningBracket(string sign);
         bool IsClosingBracket(string sign);

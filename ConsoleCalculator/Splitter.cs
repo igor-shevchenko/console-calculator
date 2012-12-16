@@ -7,11 +7,11 @@ namespace ConsoleCalculator
 {
     public class Splitter : ISplitter
     {
-        private readonly ISeparatorProvider separatorProvider;
+        private readonly ISeparatorDetector separatorDetector;
 
-        public Splitter(ISeparatorProvider separatorProvider)
+        public Splitter(ISeparatorDetector separatorDetector)
         {
-            this.separatorProvider = separatorProvider;
+            this.separatorDetector = separatorDetector;
         }
 
         public IEnumerable<string> Split(string s)
@@ -23,7 +23,7 @@ namespace ConsoleCalculator
                     continue;
                 var t = c.ToString(CultureInfo.InvariantCulture);
 
-                if (separatorProvider.IsSeparator(t))
+                if (separatorDetector.IsSeparator(t))
                 {
                     if (!String.IsNullOrEmpty(accumulator))
                     {
