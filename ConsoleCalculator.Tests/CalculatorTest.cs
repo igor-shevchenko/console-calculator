@@ -21,13 +21,15 @@ namespace ConsoleCalculator.Tests
             var tokenizer = MockRepository.GenerateMock<ITokenizer>();
             var builder = MockRepository.GenerateMock<IExpressionTreeBuilder>();
             var tree = MockRepository.GenerateMock<IExpressionTree>();
+            var validator = MockRepository.GenerateMock<IBracketValidator>();
 
             splitter.Expect(s => s.Split(Arg<string>.Is.Equal(expression))).Return(splittedString);
             tokenizer.Expect(t => t.Tokenize(Arg<List<string>>.Is.Equal(splittedString))).Return(tokens);
+            validator.Expect(v => v.Validate(Arg<List<Token>>.Is.Equal(tokens)));
             builder.Expect(b => b.Build(Arg<List<Token>>.Is.Equal(tokens))).Return(tree);
             tree.Expect(t => t.GetResult()).Return(value);
             
-            var calculator = new Calculator(splitter, tokenizer, builder);
+            var calculator = new Calculator(splitter, tokenizer, builder, validator);
 
             var result = calculator.Calculate(expression);
 
@@ -37,6 +39,7 @@ namespace ConsoleCalculator.Tests
             tokenizer.VerifyAllExpectations();
             builder.VerifyAllExpectations();
             tree.VerifyAllExpectations();
+            validator.VerifyAllExpectations();
         }
     }
 }
