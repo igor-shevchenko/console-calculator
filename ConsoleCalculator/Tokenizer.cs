@@ -5,13 +5,21 @@ namespace ConsoleCalculator
 {
     public class Tokenizer : ITokenizer
     {
+        private readonly IOperatorFactory factory;
+
         private readonly List<string> infixOperations = new List<string> { "+", "-", "*", "/" };
         private readonly List<string> prefixOperations = new List<string> { "-" };
         private readonly List<string> brackets = new List<string> { "(", ")" };
 
+        public Tokenizer(IOperatorFactory factory)
+        {
+            this.factory = factory;
+        }
+
+
         public IEnumerable<Token> Tokenize(List<string> tokens)
         {
-            var factory = new OperatorFactory();
+            
             var openedBracketsCount = 0;
             for (var i = 0; i < tokens.Count; ++i)
             {
