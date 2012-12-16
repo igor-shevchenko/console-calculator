@@ -56,6 +56,8 @@
     <Compile Include="ICalculator.cs" />
     <Compile Include="IOperatorFactory.cs" />
     <Compile Include="ITokenizer.cs" />
+    <Compile Include="Operations\IOperatorListFactory.cs" />
+    <Compile Include="Operations\OperatorListFactory.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
     <Compile Include="Tree\ExpressionTreeBuilder.cs" />
     <Compile Include="Tree\IExpressionTree.cs" />

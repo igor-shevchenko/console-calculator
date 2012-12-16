@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using ConsoleCalculator.Operations;
 using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace ConsoleCalculator.Tests
 {
@@ -8,71 +10,73 @@ namespace ConsoleCalculator.Tests
     class OperatorFactoryTest
     {
         [Test]
-        public void TestGetAddition()
+        public void TestGetValidBinaryOperator()
         {
-            var factory = new OperatorFactory();
+            var sign = "+";
+            var listFactory = MockRepository.GenerateMock<IOperatorListFactory>();
+            var op = MockRepository.GenerateMock<IBinaryOperator>();
+            op.Expect(o => o.Sign).Return(sign);
+            listFactory.Expect(f => f.GetBinaryOperators()).Return(new[] {op});
 
-            var result = factory.GetBinaryOperator("+");
+            var factory = new OperatorFactory(listFactory);
 
-            Assert.IsInstanceOf<AdditionOperator>(result);
+            var result = factory.GetBinaryOperator(sign);
+
+            Assert.AreEqual(op, result);
+            op.VerifyAllExpectations();
+            listFactory.VerifyAllExpectations();
         }
 
         [Test]
-        public void TestGetSubtraction()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestGetInvalidBinaryOperator()
         {
-            var factory = new OperatorFactory();
+            var listFactory = MockRepository.GenerateMock<IOperatorListFactory>();
+            var op = MockRepository.GenerateMock<IBinaryOperator>();
+            op.Expect(o => o.Sign).Return("+");
+            listFactory.Expect(f => f.GetBinaryOperators()).Return(new[] { op });
+
+            var factory = new OperatorFactory(listFactory);
 
             var result = factory.GetBinaryOperator("-");
 
-            Assert.IsInstanceOf<SubtractionOperator>(result);
+            op.VerifyAllExpectations();
+            listFactory.VerifyAllExpectations();
         }
 
         [Test]
-        public void TestGeMultiplication()
+        public void TestGetValidUnaryOperator()
         {
-            var factory = new OperatorFactory();
+            var sign = "-";
+            var listFactory = MockRepository.GenerateMock<IOperatorListFactory>();
+            var op = MockRepository.GenerateMock<IUnaryOperator>();
+            op.Expect(o => o.Sign).Return(sign);
+            listFactory.Expect(f => f.GetUnaryOperators()).Return(new[] { op });
 
-            var result = factory.GetBinaryOperator("*");
+            var factory = new OperatorFactory(listFactory);
 
-            Assert.IsInstanceOf<MultiplicationOperator>(result);
+            var result = factory.GetUnaryOperator(sign);
+
+            Assert.AreEqual(op, result);
+            op.VerifyAllExpectations();
+            listFactory.VerifyAllExpectations();
         }
 
         [Test]
-        public void TestGetDivision()
-        {
-            var factory = new OperatorFactory();
-
-            var result = factory.GetBinaryOperator("/");
-
-            Assert.IsInstanceOf<DivisionOperator>(result);
-        }
-
-        [Test]
-        public void TestGetNegation()
-        {
-            var factory = new OperatorFactory();
-
-            var result = factory.GetUnaryOperator("-");
-
-            Assert.IsInstanceOf<NegationOperator>(result);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void TestGetInvalidUnaryOperator()
         {
-            var factory = new OperatorFactory();
+            var listFactory = MockRepository.GenerateMock<IOperatorListFactory>();
+            var op = MockRepository.GenerateMock<IUnaryOperator>();
+            op.Expect(o => o.Sign).Return("-");
+            listFactory.Expect(f => f.GetUnaryOperators()).Return(new[] { op });
+
+            var factory = new OperatorFactory(listFactory);
 
             var result = factory.GetUnaryOperator("+");
-        }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestGetInvalidBinaryOperator()
-        {
-            var factory = new OperatorFactory();
-
-            var result = factory.GetBinaryOperator("?");
+            op.VerifyAllExpectations();
+            listFactory.VerifyAllExpectations();
         }
     }
 }
