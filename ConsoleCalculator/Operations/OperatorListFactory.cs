@@ -4,23 +4,35 @@ namespace ConsoleCalculator.Operations
 {
     public class OperatorListFactory : IOperatorListFactory
     {
+        private IList<IBinaryOperator> cachedBinaryOperators;
+        private IList<IUnaryOperator> cachedUnaryOperators;
+
         public IList<IBinaryOperator> GetBinaryOperators()
         {
-            return new IBinaryOperator[]
-                       {
-                           new AdditionOperator(),
-                           new DivisionOperator(),
-                           new MultiplicationOperator(), 
-                           new SubtractionOperator(),
-                       };
+            if (cachedBinaryOperators != null)
+                return cachedBinaryOperators;
+
+            cachedBinaryOperators = new IBinaryOperator[]
+                                    {
+                                        new AdditionOperator(),
+                                        new DivisionOperator(),
+                                        new MultiplicationOperator(), 
+                                        new SubtractionOperator(),
+                                    };
+            return cachedBinaryOperators;
+
         }
 
         public IList<IUnaryOperator> GetUnaryOperators()
         {
-            return new IUnaryOperator[]
-                       {
-                           new NegationOperator(),
-                       };
+            if (cachedUnaryOperators != null)
+                return cachedUnaryOperators;
+            
+            cachedUnaryOperators = new IUnaryOperator[]
+                                   {
+                                       new NegationOperator(),
+                                   };
+            return cachedUnaryOperators;
         } 
     }
 }
