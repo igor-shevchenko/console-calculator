@@ -2,6 +2,11 @@ namespace ConsoleCalculator.Operations
 {
     public class MultiplicationOperator : IBinaryOperator
     {
+        public string Sign
+        {
+            get { return "*"; }
+        }
+
         public int Precedence
         {
             get { return 2; }
