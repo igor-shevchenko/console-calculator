@@ -17,7 +17,7 @@ namespace ConsoleCalculator
         }
 
 
-        public IEnumerable<Token> Tokenize(List<string> tokens)
+        public IEnumerable<Token> Tokenize(IList<string> tokens)
         {
             
             var openedBracketsCount = 0;
@@ -65,12 +65,12 @@ namespace ConsoleCalculator
                 throw new ArgumentException("Unbalanced brackets");
         }
 
-        private bool AreBracketsEmpty(List<string> tokens, int position)
+        private bool AreBracketsEmpty(IList<string> tokens, int position)
         {
             return (position < tokens.Count - 1) && (tokens[position + 1] != brackets[1]);
         }
 
-        private bool IsPrefixOperation(List<string> tokens, int position)
+        private bool IsPrefixOperation(IList<string> tokens, int position)
         {
             double n;
             var isBeforeNumberOrOpeningBracket = (position < tokens.Count - 1) && (tokens[position + 1] == brackets[0] || Double.TryParse(tokens[position + 1], out n));
@@ -80,7 +80,7 @@ namespace ConsoleCalculator
             return isBeforeNumberOrOpeningBracket && isCorrectPrefixOperation && (isAtBeginning || isAfterOpeningBracket);
         }
 
-        private bool IsInfixOperation(List<string> tokens, int position)
+        private bool IsInfixOperation(IList<string> tokens, int position)
         {
             double n;
             var isBeforeNumberOrOpeningBracket = (position < tokens.Count - 1) && (tokens[position + 1] == brackets[0] || Double.TryParse(tokens[position + 1], out n));

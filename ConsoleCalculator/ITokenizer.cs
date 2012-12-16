@@ -4,6 +4,6 @@ namespace ConsoleCalculator
 {
     public interface ITokenizer
     {
-        IEnumerable<Token> Tokenize(List<string> tokens);
+        IEnumerable<Token> Tokenize(IList<string> tokens);
     }
 }
