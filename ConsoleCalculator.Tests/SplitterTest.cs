@@ -1,50 +1,72 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using ConsoleCalculator;
+using Rhino.Mocks;
+
 namespace ConsoleCalculator.Tests
 {
     [TestFixture]
     class SplitterTest
     {
         [Test]
-        public void SplitString()
+        public void TestSplitString()
         {
-            var splitter = new Splitter();
-
-            var result = splitter.Split("1+2").ToList();
+            var s = "1+2";
+            var separatorProvider = MockRepository.GenerateMock<ISeparatorProvider>();
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("1")))
+                .Return(false);
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("+")))
+                .Return(true);
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("2")))
+                .Return(false);
+            
+            var splitter = new Splitter(separatorProvider);
+            
+            var result = splitter.Split(s).ToList();
 
             CollectionAssert.AreEqual(new [] {"1", "+", "2"}, result);
+            separatorProvider.VerifyAllExpectations();
         }
 
         [Test]
-        public void SplitMultidigitNumbers()
+        public void TestSplitMultidigitNumbers()
         {
-            var splitter = new Splitter();
+            var s = "11+22";
+            var separatorProvider = MockRepository.GenerateMock<ISeparatorProvider>();
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("1")))
+                .Return(false).Repeat.Twice();
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("+")))
+                .Return(true);
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("2")))
+                .Return(false).Repeat.Twice();
 
-            var result = splitter.Split("11+22").ToList();
+            var splitter = new Splitter(separatorProvider);
+
+            var result = splitter.Split(s).ToList();
 
             CollectionAssert.AreEqual(new[] { "11", "+", "22" }, result);
+            separatorProvider.VerifyAllExpectations();
         }
 
         [Test]
-        public void SplitNegativeNumbers()
+        public void TestSplitMultipleSeparators()
         {
-            var splitter = new Splitter();
+            var s = "1++2";
+            var separatorProvider = MockRepository.GenerateMock<ISeparatorProvider>();
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("1")))
+                .Return(false);
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("+")))
+                .Return(true).Repeat.Twice();
+            separatorProvider.Expect(p => p.IsSeparator(Arg<string>.Is.Equal("2")))
+                .Return(false);
 
-            var result = splitter.Split("-1+(-2)").ToList();
+            var splitter = new Splitter(separatorProvider);
 
-            CollectionAssert.AreEqual(new[] { "-", "1", "+", "(", "-", "2", ")" }, result);
+            var result = splitter.Split(s).ToList();
+
+            CollectionAssert.AreEqual(new[] { "1", "+", "+", "2"}, result);
+            separatorProvider.VerifyAllExpectations();
         }
 
-        [Test]
-        public void SplitMultipleBrackets()
-        {
-            var splitter = new Splitter();
-
-            var result = splitter.Split("1+(((2*3)/4)-5)").ToList();
-
-            CollectionAssert.AreEqual(new[] { "1", "+", "(", "(", "(", "2", "*", "3", ")", "/", "4", ")", "-", "5", ")" },
-                result);
-        }
     }
 }

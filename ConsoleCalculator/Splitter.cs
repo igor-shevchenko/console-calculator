@@ -1,27 +1,36 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace ConsoleCalculator
 {
     public class Splitter : ISplitter
     {
-        private readonly List<char> separators = new List<char> {'+', '-', '*', '/', '(', ')'};
+        private readonly ISeparatorProvider separatorProvider;
+
+        public Splitter(ISeparatorProvider separatorProvider)
+        {
+            this.separatorProvider = separatorProvider;
+        }
+
         public IEnumerable<string> Split(string s)
         {
             var accumulator = String.Empty;
-            foreach (var t in s)
+            foreach (var c in s)
             {
-                if (t == ' ')
+                if (c == ' ')
                     continue;
-                if (separators.Contains(t))
+                var t = c.ToString(CultureInfo.InvariantCulture);
+
+                if (separatorProvider.IsSeparator(t))
                 {
                     if (!String.IsNullOrEmpty(accumulator))
                     {
                         yield return accumulator;
                         accumulator = String.Empty;
                     }
-                    yield return t.ToString(CultureInfo.InvariantCulture);
+                    yield return t;
                 } else
                 {
                     accumulator += t;
