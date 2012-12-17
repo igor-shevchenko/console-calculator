@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Tokens
 {
     public class Tokenizer : ITokenizer
     {

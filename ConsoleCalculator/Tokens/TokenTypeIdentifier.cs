@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ConsoleCalculator.Detectors;
 
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Tokens
 {
     public class TokenTypeIdentifier : ITokenTypeIdentifier
     {

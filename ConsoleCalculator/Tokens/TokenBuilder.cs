@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Tokens
 {
     public class TokenBuilder : ITokenBuilder
     {

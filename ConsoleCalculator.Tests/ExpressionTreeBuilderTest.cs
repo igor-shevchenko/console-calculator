@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ConsoleCalculator.Operations;
+using ConsoleCalculator.Tokens;
 using ConsoleCalculator.Tree;
 using NUnit.Framework;
 

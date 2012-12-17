@@ -61,20 +61,20 @@
     <Compile Include="IOperatorFactory.cs" />
     <Compile Include="Detectors\IOperationSignDetector.cs" />
     <Compile Include="Detectors\ISeparatorDetector.cs" />
-    <Compile Include="ITokenBuilder.cs" />
-    <Compile Include="ITokenizer.cs" />
-    <Compile Include="ITokenTypeIdentifier.cs" />
+    <Compile Include="Tokens\ITokenBuilder.cs" />
+    <Compile Include="Tokens\ITokenizer.cs" />
+    <Compile Include="Tokens\ITokenTypeIdentifier.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />
     <Compile Include="Detectors\OperationSignDetector.cs" />
     <Compile Include="Detectors\SeparatorDetector.cs" />
-    <Compile Include="TokenBuilder.cs" />
-    <Compile Include="TokenType.cs" />
-    <Compile Include="TokenTypeIdentifier.cs" />
+    <Compile Include="Tokens\TokenBuilder.cs" />
+    <Compile Include="Tokens\TokenType.cs" />
+    <Compile Include="Tokens\TokenTypeIdentifier.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
     <Compile Include="Tree\ExpressionTreeBuilder.cs" />
     <Compile Include="Tree\IExpressionTree.cs" />
-    <Compile Include="Tokenizer.cs" />
+    <Compile Include="Tokens\Tokenizer.cs" />
     <Compile Include="Operations\AdditionOperator.cs" />
     <Compile Include="Operations\DivisionOperator.cs" />
     <Compile Include="Operations\IBinaryOperator.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="OperatorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Token.cs" />
+    <Compile Include="Tokens\Token.cs" />
     <Compile Include="Splitter.cs" />
     <Compile Include="Tree\IExpressionTreeBuilder.cs" />
   </ItemGroup>

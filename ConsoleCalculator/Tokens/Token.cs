@@ -1,7 +1,7 @@
 using System;
 using ConsoleCalculator.Operations;
 
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Tokens
 {
     public class Token
     {
