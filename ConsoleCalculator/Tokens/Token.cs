@@ -63,10 +63,8 @@ namespace ConsoleCalculator.Tokens
 
         public int GetOperatorPrecedence()
         {
-            if (Type == TokenType.BinaryOperator)
-                return ((IBinaryOperator) token).Precedence;
-            if (Type == TokenType.UnaryOperator)
-                return ((IUnaryOperator) token).Precedence;
+            if (Type == TokenType.BinaryOperator || Type == TokenType.UnaryOperator)
+                return ((IOperator) token).Precedence;
             throw new Exception();
         }
     }
