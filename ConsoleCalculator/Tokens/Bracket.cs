@@ -1,4 +1,4 @@
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Tokens
 {
     public enum Bracket
     {
