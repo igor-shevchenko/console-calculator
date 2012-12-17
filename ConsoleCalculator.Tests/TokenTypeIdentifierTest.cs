@@ -69,11 +69,11 @@ namespace ConsoleCalculator.Tests
             var bracketSignDetector = MockRepository.GenerateMock<IBracketSignDetector>();
             operationSignDetector.Expect(d => d.IsUnaryOperator(tokens[0])).Return(false);
             operationSignDetector.Expect(d => d.IsBinaryOperator(tokens[0])).Return(false);
-            bracketSignDetector.Expect(d => d.IsBracket(tokens[0])).Return(true);
+            bracketSignDetector.Expect(d => d.IsOpeningBracket(tokens[0])).Return(true);
             var identifier = new TokenTypeIdentifier(operationSignDetector, bracketSignDetector);
             var result = identifier.GetTokenType(tokens, 0);
 
-            Assert.AreEqual(TokenType.Bracket, result);
+            Assert.AreEqual(TokenType.OpeningBracket, result);
             operationSignDetector.VerifyAllExpectations();
             bracketSignDetector.VerifyAllExpectations();
         }

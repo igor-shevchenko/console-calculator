@@ -5,6 +5,7 @@ namespace ConsoleCalculator
         Value,
         BinaryOperator,
         UnaryOperator,
-        Bracket
+        OpeningBracket,
+        ClosingBracket
     }
 }

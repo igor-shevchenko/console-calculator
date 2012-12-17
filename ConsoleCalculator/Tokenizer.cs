@@ -31,12 +31,14 @@ namespace ConsoleCalculator
                     case TokenType.Value:
                         yield return new Token(Double.Parse(tokens[i]));
                         break;
-                    case TokenType.Bracket:
-                        if (tokens[i] == "(")
-                            yield return new Token(Bracket.Opening);
-                        else
-                            yield return new Token(Bracket.Closing);
+                    case TokenType.OpeningBracket:
+                        yield return new Token(Bracket.Opening);
                         break;
+                    case TokenType.ClosingBracket:
+                        yield return new Token(Bracket.Closing);
+                        break;
+                    default:
+                        throw new Exception("Unknown token type");
                 }
             }
         }

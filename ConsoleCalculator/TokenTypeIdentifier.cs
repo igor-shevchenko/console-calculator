@@ -25,8 +25,10 @@ namespace ConsoleCalculator
                 return TokenType.BinaryOperator;
             if (Double.TryParse(token, out n))
                 return TokenType.Value;
-            if (bracketSignDetector.IsBracket(token))
-                return TokenType.Bracket;
+            if (bracketSignDetector.IsOpeningBracket(token))
+                return TokenType.OpeningBracket;
+            if (bracketSignDetector.IsClosingBracket(token))
+                return TokenType.ClosingBracket;
             throw new ArgumentException("Unknown token");
         }
 
