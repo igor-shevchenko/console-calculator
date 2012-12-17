@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Detectors
 {
     public interface IOperationSignDetector
     {

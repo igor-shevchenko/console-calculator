@@ -1,4 +1,4 @@
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Detectors
 {
     public interface IBracketSignDetector
     {

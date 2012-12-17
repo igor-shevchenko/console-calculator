@@ -51,22 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bracket.cs" />
-    <Compile Include="BracketSignDetector.cs" />
+    <Compile Include="Detectors\BracketSignDetector.cs" />
     <Compile Include="BracketValidator.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="ContainerFactory.cs" />
-    <Compile Include="IBracketSignDetector.cs" />
+    <Compile Include="Detectors\IBracketSignDetector.cs" />
     <Compile Include="IBracketValidator.cs" />
     <Compile Include="ICalculator.cs" />
     <Compile Include="IOperatorFactory.cs" />
-    <Compile Include="IOperationSignDetector.cs" />
-    <Compile Include="ISeparatorDetector.cs" />
+    <Compile Include="Detectors\IOperationSignDetector.cs" />
+    <Compile Include="Detectors\ISeparatorDetector.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="ITokenTypeIdentifier.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />
-    <Compile Include="OperationSignDetector.cs" />
-    <Compile Include="SeparatorDetector.cs" />
+    <Compile Include="Detectors\OperationSignDetector.cs" />
+    <Compile Include="Detectors\SeparatorDetector.cs" />
     <Compile Include="TokenType.cs" />
     <Compile Include="TokenTypeIdentifier.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />

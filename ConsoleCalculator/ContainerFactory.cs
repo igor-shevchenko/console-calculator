@@ -1,5 +1,6 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using ConsoleCalculator.Detectors;
 using ConsoleCalculator.Operations;
 using ConsoleCalculator.Tree;
 

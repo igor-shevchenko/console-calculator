@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using ConsoleCalculator.Operations;
 
-namespace ConsoleCalculator
+namespace ConsoleCalculator.Detectors
 {
     public class OperationSignDetector : IOperationSignDetector
     {

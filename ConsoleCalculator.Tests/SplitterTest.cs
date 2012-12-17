@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ConsoleCalculator.Detectors;
 using NUnit.Framework;
 using ConsoleCalculator;
 using Rhino.Mocks;
