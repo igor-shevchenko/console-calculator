@@ -61,12 +61,14 @@
     <Compile Include="IOperatorFactory.cs" />
     <Compile Include="Detectors\IOperationSignDetector.cs" />
     <Compile Include="Detectors\ISeparatorDetector.cs" />
+    <Compile Include="ITokenBuilder.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="ITokenTypeIdentifier.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />
     <Compile Include="Detectors\OperationSignDetector.cs" />
     <Compile Include="Detectors\SeparatorDetector.cs" />
+    <Compile Include="TokenBuilder.cs" />
     <Compile Include="TokenType.cs" />
     <Compile Include="TokenTypeIdentifier.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
