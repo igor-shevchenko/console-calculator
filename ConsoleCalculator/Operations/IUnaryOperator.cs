@@ -1,9 +1,7 @@
 namespace ConsoleCalculator.Operations
 {
-    public interface IUnaryOperator
+    public interface IUnaryOperator : IOperator
     {
-        string Sign { get; }
-        int Precedence { get; }
         double Apply(double arg);
     }
 }
