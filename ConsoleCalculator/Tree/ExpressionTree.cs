@@ -18,15 +18,15 @@ namespace ConsoleCalculator.Tree
 
         public double GetResult()
         {
-            if (Token.IsValue)
+            if (Token.Type == TokenType.Value)
                 return Token.GetValue();
-            if (Token.IsUnaryOperator)
+            if (Token.Type == TokenType.UnaryOperator)
             {
                 var operation = Token.GetUnaryOperator();
                 var childResult = Children.First().GetResult();
                 return operation.Apply(childResult);
             }
-            if (Token.IsBinaryOperator)
+            if (Token.Type == TokenType.BinaryOperator)
             {
                 var operation = Token.GetBinaryOperator();
                 var leftChildResult = Children[0].GetResult();

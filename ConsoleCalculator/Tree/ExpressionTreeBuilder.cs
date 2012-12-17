@@ -35,16 +35,14 @@ namespace ConsoleCalculator.Tree
             var count = tokens.Count;
             if (count < 2)
                 return false;
-            var startsWithOpeningBracket = tokens[0].IsBracket && tokens[0].GetBracket() == Bracket.Opening;
-            var endsWithClosingBracket = tokens[count - 1].IsBracket && tokens[count - 1].GetBracket() == Bracket.Closing;
+            var startsWithOpeningBracket = tokens[0].Type == TokenType.OpeningBracket;
+            var endsWithClosingBracket = tokens[count - 1].Type == TokenType.ClosingBracket;
             return startsWithOpeningBracket && endsWithClosingBracket;
         }
 
         private bool IsExpressionASingleValue(IList<Token> tokens)
         {
-            if (tokens.Count > 1)
-                return false;
-            return tokens[0].IsValue;
+            return tokens.Count == 1 && tokens[0].Type == TokenType.Value;
         }
 
         private int GetIndexOfLeastPrecedentOperation(IList<Token> tokens)
@@ -54,18 +52,20 @@ namespace ConsoleCalculator.Tree
             for (var i = 0; i < tokens.Count; ++i)
             {
                 var token = tokens[i];
-                if (token.IsBracket)
+                if (token.Type == TokenType.OpeningBracket)
                 {
-                    if (token.GetBracket() == Bracket.Opening)
-                        bracketDepth++;
-                    else
-                        bracketDepth--;
+                    bracketDepth++;
+                    continue;
+                }
+                if (token.Type == TokenType.ClosingBracket)
+                {
+                    bracketDepth--;
                     continue;
                 }
                 if (bracketDepth > 0)
                     continue;
 
-                if (token.IsBinaryOperator || token.IsUnaryOperator)
+                if (token.Type == TokenType.BinaryOperator || token.Type == TokenType.UnaryOperator)
                 {
                     if (leastIndex == -1 || GetOperatorPrecedence(token) <= GetOperatorPrecedence(tokens[leastIndex]))
                     {
@@ -78,9 +78,9 @@ namespace ConsoleCalculator.Tree
 
         private int GetOperatorPrecedence(Token op)
         {
-            if (op.IsBinaryOperator)
+            if (op.Type == TokenType.BinaryOperator)
                 return op.GetBinaryOperator().Precedence;
-            if (op.IsUnaryOperator)
+            if (op.Type == TokenType.UnaryOperator)
                 return op.GetUnaryOperator().Precedence;
             throw new Exception();
         }

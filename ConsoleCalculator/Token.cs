@@ -5,65 +5,60 @@ namespace ConsoleCalculator
 {
     public class Token
     {
-        private readonly double value;
-        private readonly IBinaryOperator binaryOperator;
-        private readonly IUnaryOperator unaryOperator;
-        private readonly Bracket bracket;
-        public readonly bool IsValue;
-        public readonly bool IsBinaryOperator;
-        public readonly bool IsUnaryOperator;
-        public readonly bool IsBracket;
-
+        private readonly object token;
+        public readonly TokenType Type;
+        
         public Token(double value)
         {
-            this.value = value;
-            IsValue = true;
+            token = value;
+            Type = TokenType.Value;
         }
 
         public Token(IBinaryOperator binaryOperator)
         {
-            this.binaryOperator = binaryOperator;
-            IsBinaryOperator = true;
+            token = binaryOperator;
+            Type = TokenType.BinaryOperator;
         }
 
         public Token(IUnaryOperator unaryOperator)
         {
-            this.unaryOperator = unaryOperator;
-            IsUnaryOperator = true;
+            token = unaryOperator;
+            Type = TokenType.UnaryOperator;
         }
 
-        public Token (Bracket bracket)
+        public Token(Bracket bracket)
         {
-            this.bracket = bracket;
-            IsBracket = true;
+            token = bracket;
+            Type = bracket == Bracket.Opening? TokenType.OpeningBracket : TokenType.ClosingBracket;
         }
+
 
         public double GetValue()
         {
-            if (!IsValue)
+            if (Type != TokenType.Value)
                 throw new Exception();
-            return value;
+            return (double)token;
         }
 
         public IBinaryOperator GetBinaryOperator()
         {
-            if (!IsBinaryOperator)
+            if (Type != TokenType.BinaryOperator)
                 throw new Exception();
-            return binaryOperator;
+            return (IBinaryOperator)token;
         }
 
         public IUnaryOperator GetUnaryOperator()
         {
-            if (!IsUnaryOperator)
+            if (Type != TokenType.UnaryOperator)
                 throw new Exception();
-            return unaryOperator;
+            return (IUnaryOperator)token;
         }
 
         public Bracket GetBracket()
         {
-            if (!IsBracket)
+            if (Type != TokenType.OpeningBracket || Type != TokenType.ClosingBracket)
                 throw new Exception();
-            return bracket;
+            return (Bracket)token;
         }
     }
 }
