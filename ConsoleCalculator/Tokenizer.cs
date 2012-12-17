@@ -5,13 +5,13 @@ namespace ConsoleCalculator
 {
     public class Tokenizer : ITokenizer
     {
-        private readonly IOperatorFactory factory;
+        private readonly ITokenBuilder tokenBuilder;
         private readonly ITokenTypeIdentifier tokenTypeIdentifier;
 
-        public Tokenizer(IOperatorFactory factory, ITokenTypeIdentifier tokenTypeIdentifier)
+        public Tokenizer(ITokenTypeIdentifier tokenTypeIdentifier, ITokenBuilder tokenBuilder)
         {
-            this.factory = factory;
             this.tokenTypeIdentifier = tokenTypeIdentifier;
+            this.tokenBuilder = tokenBuilder;
         }
 
 
@@ -20,26 +20,7 @@ namespace ConsoleCalculator
             for (var i = 0; i < tokens.Count; ++i)
             {
                 var type = tokenTypeIdentifier.GetTokenType(tokens, i);
-                switch(type)
-                {
-                    case TokenType.BinaryOperator:
-                        yield return new Token(factory.GetBinaryOperator(tokens[i]));
-                        break;
-                    case TokenType.UnaryOperator:
-                        yield return new Token(factory.GetUnaryOperator(tokens[i]));
-                        break;
-                    case TokenType.Value:
-                        yield return new Token(Double.Parse(tokens[i]));
-                        break;
-                    case TokenType.OpeningBracket:
-                        yield return new Token(Bracket.Opening);
-                        break;
-                    case TokenType.ClosingBracket:
-                        yield return new Token(Bracket.Closing);
-                        break;
-                    default:
-                        throw new Exception("Unknown token type");
-                }
+                yield return tokenBuilder.Build(tokens[i], type);
             }
         }
 
