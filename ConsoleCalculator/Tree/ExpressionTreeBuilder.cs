@@ -6,6 +6,12 @@ using ConsoleCalculator.Tokens;
 
 namespace ConsoleCalculator.Tree
 {
+    /// <summary>
+    /// Строит дерево выражения с учетом порядка операций.
+    /// Находит в выражении наименее приоритетную операцию и разбивает по ней выражение 
+    /// на две (для бинарных операций) части, которые аналогично обрабатываются рекурсивно.
+    /// На выходе получается дерево, по которому можно снизу вверх вычислить значение выражения.
+    /// </summary>
     public class ExpressionTreeBuilder : IExpressionTreeBuilder
     {
         public IExpressionTree Build(IList<Token> tokens)
@@ -20,14 +26,18 @@ namespace ConsoleCalculator.Tree
             {
                 return new ExpressionTree(tokens[0], null);
             }
+
             var index = GetIndexOfLeastPrecedentOperation(tokens);
+            
             var leftchild = Build(tokens.Take(index).ToList());
             var rightchild = Build(tokens.Skip(index + 1).ToList());
+            
             var children = new List<IExpressionTree>();
             if (leftchild != null)
                 children.Add(leftchild);
             if (rightchild != null)
                 children.Add(rightchild);
+            
             return new ExpressionTree(tokens[index], children);
         }
 
@@ -66,9 +76,11 @@ namespace ConsoleCalculator.Tree
                 if (bracketDepth > 0)
                     continue;
 
-                if (token.Type == TokenType.BinaryOperator || token.Type == TokenType.UnaryOperator)
+                if (token.Type == TokenType.BinaryOperator || 
+                    token.Type == TokenType.UnaryOperator)
                 {
-                    if (leastIndex == -1 || GetOperatorPrecedence(token) <= GetOperatorPrecedence(tokens[leastIndex]))
+                    if (leastIndex == -1 || 
+                        GetOperatorPrecedence(token) <= GetOperatorPrecedence(tokens[leastIndex]))
                     {
                         leastIndex = i;
                     }
