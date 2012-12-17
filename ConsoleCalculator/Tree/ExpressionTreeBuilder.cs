@@ -1,26 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ConsoleCalculator.Tree
 {
     public class ExpressionTreeBuilder : IExpressionTreeBuilder
     {
-        public IExpressionTree Build(List<Token> tokens)
+        public IExpressionTree Build(IList<Token> tokens)
         {
             if (tokens.Count == 0)
                 return null;
             if (IsExpressionInBrackets(tokens))
             {
-                return Build(tokens.GetRange(1, tokens.Count - 2));
+                return Build(tokens.Skip(1).Take(tokens.Count - 2).ToList());
             }
             if (IsExpressionASingleValue(tokens))
             {
                 return new ExpressionTree(tokens[0], null);
             }
             var index = GetIndexOfLeastPrecedentOperation(tokens);
-            var leftchild = Build(tokens.GetRange(0, index));
-            var rightchild = Build(tokens.GetRange(index + 1, tokens.Count - 1 - index));
+            var leftchild = Build(tokens.Take(index).ToList());
+            var rightchild = Build(tokens.Skip(index + 1).ToList());
             var children = new List<IExpressionTree>();
             if (leftchild != null)
                 children.Add(leftchild);
