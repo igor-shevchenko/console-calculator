@@ -19,12 +19,11 @@ namespace ConsoleCalculator.Tokens
         public TokenType GetTokenType(IList<string> tokens, int position)
         {
             var token = tokens[position];
-            double n;
             if (IsUnaryOperator(tokens, position))
                 return TokenType.UnaryOperator;
             if (IsBinaryOperation(tokens, position))
                 return TokenType.BinaryOperator;
-            if (Double.TryParse(token, out n))
+            if (IsValue(token))
                 return TokenType.Value;
             if (bracketSignDetector.IsOpeningBracket(token))
                 return TokenType.OpeningBracket;
@@ -35,8 +34,7 @@ namespace ConsoleCalculator.Tokens
 
         private bool IsUnaryOperator(IList<string> tokens, int position)
         {
-            double n;
-            var isBeforeNumber = (position < tokens.Count - 1) && Double.TryParse(tokens[position + 1], out n);
+            var isBeforeNumber = (position < tokens.Count - 1) && IsValue(tokens[position + 1]);
             var isBeforeOpeningBracket = (position < tokens.Count - 1) &&
                                          bracketSignDetector.IsOpeningBracket(tokens[position + 1]);
             var isAtBeginning = position == 0;
@@ -47,14 +45,19 @@ namespace ConsoleCalculator.Tokens
 
         private bool IsBinaryOperation(IList<string> tokens, int position)
         {
-            double n;
-            var isBeforeNumber = (position < tokens.Count - 1) && Double.TryParse(tokens[position + 1], out n);
+            var isBeforeNumber = (position < tokens.Count - 1) && IsValue(tokens[position + 1]);
             var isBeforeOpeningBracket = (position < tokens.Count - 1) &&
                                          bracketSignDetector.IsOpeningBracket(tokens[position + 1]);
-            var isAfterNumber = (position > 0) && Double.TryParse(tokens[position - 1], out n);
+            var isAfterNumber = (position > 0) && IsValue(tokens[position - 1]);
             var isAfterClosingBracket = (position > 0) && bracketSignDetector.IsClosingBracket(tokens[position - 1]);
             var isCorrectBinaryOperation = operationSignDetector.IsBinaryOperator(tokens[position]);
             return isCorrectBinaryOperation && (isBeforeNumber || isBeforeOpeningBracket) && (isAfterNumber || isAfterClosingBracket);
+        }
+
+        private bool IsValue(string token)
+        {
+            double n;
+            return Double.TryParse(token, out n);
         }
     }
 }

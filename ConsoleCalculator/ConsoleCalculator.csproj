@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Operations\IOperator.cs" />
     <Compile Include="Tokens\Bracket.cs" />
     <Compile Include="Detectors\BracketSignDetector.cs" />
     <Compile Include="BracketValidator.cs" />
