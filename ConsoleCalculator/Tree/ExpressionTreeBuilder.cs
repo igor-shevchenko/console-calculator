@@ -80,22 +80,13 @@ namespace ConsoleCalculator.Tree
                     token.Type == TokenType.UnaryOperator)
                 {
                     if (leastIndex == -1 || 
-                        GetOperatorPrecedence(token) <= GetOperatorPrecedence(tokens[leastIndex]))
+                        token.GetOperatorPrecedence() <= tokens[leastIndex].GetOperatorPrecedence())
                     {
                         leastIndex = i;
                     }
                 }
             }
             return leastIndex;
-        }
-
-        private int GetOperatorPrecedence(Token op)
-        {
-            if (op.Type == TokenType.BinaryOperator)
-                return op.GetBinaryOperator().Precedence;
-            if (op.Type == TokenType.UnaryOperator)
-                return op.GetUnaryOperator().Precedence;
-            throw new Exception();
         }
     }
 }

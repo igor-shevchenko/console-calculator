@@ -7,7 +7,7 @@ namespace ConsoleCalculator.Tokens
     {
         private readonly object token;
         public readonly TokenType Type;
-        
+
         public Token(double value)
         {
             token = value;
@@ -29,7 +29,7 @@ namespace ConsoleCalculator.Tokens
         public Token(Bracket bracket)
         {
             token = bracket;
-            Type = bracket == Bracket.Opening? TokenType.OpeningBracket : TokenType.ClosingBracket;
+            Type = bracket == Bracket.Opening ? TokenType.OpeningBracket : TokenType.ClosingBracket;
         }
 
 
@@ -37,28 +37,37 @@ namespace ConsoleCalculator.Tokens
         {
             if (Type != TokenType.Value)
                 throw new Exception();
-            return (double)token;
+            return (double) token;
         }
 
         public IBinaryOperator GetBinaryOperator()
         {
             if (Type != TokenType.BinaryOperator)
                 throw new Exception();
-            return (IBinaryOperator)token;
+            return (IBinaryOperator) token;
         }
 
         public IUnaryOperator GetUnaryOperator()
         {
             if (Type != TokenType.UnaryOperator)
                 throw new Exception();
-            return (IUnaryOperator)token;
+            return (IUnaryOperator) token;
         }
 
         public Bracket GetBracket()
         {
             if (Type != TokenType.OpeningBracket || Type != TokenType.ClosingBracket)
                 throw new Exception();
-            return (Bracket)token;
+            return (Bracket) token;
+        }
+
+        public int GetOperatorPrecedence()
+        {
+            if (Type == TokenType.BinaryOperator)
+                return ((IBinaryOperator) token).Precedence;
+            if (Type == TokenType.UnaryOperator)
+                return ((IUnaryOperator) token).Precedence;
+            throw new Exception();
         }
     }
 }
