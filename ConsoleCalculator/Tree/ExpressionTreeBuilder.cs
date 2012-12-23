@@ -27,7 +27,7 @@ namespace ConsoleCalculator.Tree
                 return new ExpressionTree(tokens[0], null);
             }
 
-            var index = GetIndexOfLeastPrecedentOperation(tokens);
+            var index = GetIndexOfOperatorWithLowestPrecedence(tokens);
             
             var leftchild = Build(tokens.Take(index).ToList());
             var rightchild = Build(tokens.Skip(index + 1).ToList());
@@ -56,7 +56,7 @@ namespace ConsoleCalculator.Tree
             return tokens.Count == 1 && tokens[0].Type == TokenType.Value;
         }
 
-        private int GetIndexOfLeastPrecedentOperation(IList<Token> tokens)
+        private int GetIndexOfOperatorWithLowestPrecedence(IList<Token> tokens)
         {
             var leastIndex = -1;
             var bracketDepth = 0;
