@@ -26,7 +26,8 @@ namespace ConsoleCalculator
         {
             var splittedString = splitter.Split(s).ToList();
             var tokens = tokenizer.Tokenize(splittedString).ToList();
-            bracketValidator.Validate(tokens);
+            if (!bracketValidator.IsValid(tokens))
+                throw new Exception("Bracket error");
             var expressionTree = expressionTreeBuilder.Build(tokens);
             return expressionTree.GetResult();
         }

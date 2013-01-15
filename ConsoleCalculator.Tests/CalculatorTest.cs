@@ -26,7 +26,7 @@ namespace ConsoleCalculator.Tests
 
             splitter.Expect(s => s.Split(Arg<string>.Is.Equal(expression))).Return(splittedString);
             tokenizer.Expect(t => t.Tokenize(Arg<List<string>>.Is.Equal(splittedString))).Return(tokens);
-            validator.Expect(v => v.Validate(Arg<List<Token>>.Is.Equal(tokens)));
+            validator.Expect(v => v.IsValid(Arg<List<Token>>.Is.Equal(tokens))).Return(true);
             builder.Expect(b => b.Build(Arg<List<Token>>.Is.Equal(tokens))).Return(tree);
             tree.Expect(t => t.GetResult()).Return(value);
             
@@ -40,6 +40,34 @@ namespace ConsoleCalculator.Tests
             tokenizer.VerifyAllExpectations();
             builder.VerifyAllExpectations();
             tree.VerifyAllExpectations();
+            validator.VerifyAllExpectations();
+        }
+
+        [Test]
+        [ExpectedException]
+        public void TestCalculateWithInvalidBrackets()
+        {
+            var expression = String.Empty;
+            var splittedString = new List<string>();
+            var tokens = new List<Token>();
+            var value = 0;
+
+            var splitter = MockRepository.GenerateMock<ISplitter>();
+            var tokenizer = MockRepository.GenerateMock<ITokenizer>();
+            var builder = MockRepository.GenerateMock<IExpressionTreeBuilder>();
+            var validator = MockRepository.GenerateMock<IBracketValidator>();
+
+            splitter.Expect(s => s.Split(Arg<string>.Is.Equal(expression))).Return(splittedString);
+            tokenizer.Expect(t => t.Tokenize(Arg<List<string>>.Is.Equal(splittedString))).Return(tokens);
+            validator.Expect(v => v.IsValid(Arg<List<Token>>.Is.Equal(tokens))).Return(false);
+
+            var calculator = new Calculator(splitter, tokenizer, builder, validator);
+
+            var result = calculator.Calculate(expression);
+
+            splitter.VerifyAllExpectations();
+            tokenizer.VerifyAllExpectations();
+            builder.VerifyAllExpectations();
             validator.VerifyAllExpectations();
         }
     }

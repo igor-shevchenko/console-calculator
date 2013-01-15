@@ -6,7 +6,7 @@ namespace ConsoleCalculator
 {
     public class BracketValidator : IBracketValidator
     {
-        public void Validate(IList<Token> tokens)
+        public bool IsValid(IList<Token> tokens)
         {
             var openedBracketCount = 0;
             for (var i = 0; i < tokens.Count; ++i)
@@ -16,16 +16,15 @@ namespace ConsoleCalculator
                 {
                     openedBracketCount++;
                     if (AreBracketsEmpty(tokens, i))
-                        throw new ArgumentException("Empty brackets");
+                        return false;
                 } else if (token.Type == TokenType.ClosingBracket)
                 {
                     openedBracketCount--;
                     if (openedBracketCount < 0)
-                        throw new ArgumentException("Unbalanced brackets");
+                        return false;
                 }
             }
-            if (openedBracketCount != 0)
-                throw new ArgumentException("Unbalanced brackets");
+            return openedBracketCount == 0;
         }
 
         private bool AreBracketsEmpty(IList<Token> tokens, int positionOfOpeningBracket)

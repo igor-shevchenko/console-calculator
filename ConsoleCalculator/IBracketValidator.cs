@@ -5,6 +5,6 @@ namespace ConsoleCalculator
 {
     public interface IBracketValidator
     {
-        void Validate(IList<Token> tokens);
+        bool IsValid(IList<Token> tokens);
     }
 }

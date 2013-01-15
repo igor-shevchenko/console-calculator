@@ -12,7 +12,6 @@ namespace ConsoleCalculator.Tests
     class BracketValidatorTest
     {
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void TestNotValidateUnbalancedLeftBracket()
         {
             var op = MockRepository.GenerateStub<IBinaryOperator>();
@@ -26,12 +25,12 @@ namespace ConsoleCalculator.Tests
 
             var validator = new BracketValidator();
 
-            validator.Validate(invalidTokens);
+            var result = validator.IsValid(invalidTokens);
 
+            Assert.IsFalse(result);
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void TestNotValidateUnbalancedRightBracket()
         {
             var op = MockRepository.GenerateStub<IBinaryOperator>();
@@ -45,11 +44,12 @@ namespace ConsoleCalculator.Tests
 
             var validator = new BracketValidator();
 
-            validator.Validate(invalidTokens);
+            var result = validator.IsValid(invalidTokens);
+
+            Assert.IsFalse(result);
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void TestNotValidateEmptyBrackets()
         {
             var op = MockRepository.GenerateStub<IBinaryOperator>();
@@ -63,7 +63,9 @@ namespace ConsoleCalculator.Tests
 
             var validator = new BracketValidator();
 
-            validator.Validate(invalidTokens);
+            var result = validator.IsValid(invalidTokens);
+
+            Assert.IsFalse(result);
         }
 
         [Test]
@@ -93,7 +95,9 @@ namespace ConsoleCalculator.Tests
                                     };
             var validator = new BracketValidator();
 
-            validator.Validate(validTokens);
+            var result = validator.IsValid(validTokens);
+
+            Assert.IsTrue(result);
         }
     }
 }
