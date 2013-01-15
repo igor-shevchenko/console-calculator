@@ -6,7 +6,7 @@ namespace ConsoleCalculator.Tree
     public interface IExpressionTree
     {
         Token Token { get; }
-        IList<IExpressionTree> Children { get; }
+        IEnumerable<IExpressionTree> Children { get; }
         double GetResult();
     }
 }
