@@ -14,6 +14,13 @@ namespace ConsoleCalculator.Tree
     /// </summary>
     public class ExpressionTreeBuilder : IExpressionTreeBuilder
     {
+        private readonly IBracketValidator bracketValidator;
+
+        public ExpressionTreeBuilder(IBracketValidator bracketValidator)
+        {
+            this.bracketValidator = bracketValidator;
+        }
+
         public IExpressionTree Build(IList<Token> tokens)
         {
             if (tokens.Count == 0)
@@ -48,7 +55,7 @@ namespace ConsoleCalculator.Tree
                 return false;
             var startsWithOpeningBracket = tokens[0].Type == TokenType.OpeningBracket;
             var endsWithClosingBracket = tokens[count - 1].Type == TokenType.ClosingBracket;
-            return startsWithOpeningBracket && endsWithClosingBracket;
+            return startsWithOpeningBracket && endsWithClosingBracket && bracketValidator.IsValid(tokens.Skip(1).Take(tokens.Count - 2).ToList());
         }
 
         private bool IsExpressionASingleValue(IList<Token> tokens)

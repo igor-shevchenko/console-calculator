@@ -50,7 +50,6 @@ namespace ConsoleCalculator.Tests
             var expression = String.Empty;
             var splittedString = new List<string>();
             var tokens = new List<Token>();
-            var value = 0;
 
             var splitter = MockRepository.GenerateMock<ISplitter>();
             var tokenizer = MockRepository.GenerateMock<ITokenizer>();
