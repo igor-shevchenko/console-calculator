@@ -27,8 +27,9 @@ namespace ConsoleCalculator.Tests
             var tree = builder.Build(tokens);
 
             Assert.AreEqual(tree.Token, tokens[1]);
-            Assert.AreEqual(tree.Children[0].Token, tokens[0]);
-            Assert.AreEqual(tree.Children[1].Token, tokens[2]);
+            var children = tree.Children.ToList();
+            Assert.AreEqual(children[0].Token, tokens[0]);
+            Assert.AreEqual(children[1].Token, tokens[2]);
         }
 
         [Test]
@@ -45,7 +46,7 @@ namespace ConsoleCalculator.Tests
             var tree = builder.Build(tokens);
 
             Assert.AreEqual(tree.Token, tokens[0]);
-            Assert.AreEqual(tree.Children[0].Token, tokens[1]);
+            Assert.AreEqual(tree.Children.ToList()[0].Token, tokens[1]);
         }
 
         [Test]
@@ -69,10 +70,12 @@ namespace ConsoleCalculator.Tests
             var tree = builder.Build(tokens);
 
             Assert.AreEqual(tree.Token, tokens[1]);
-            Assert.AreEqual(tree.Children[0].Token, tokens[0]);
-            Assert.AreEqual(tree.Children[1].Token, tokens[4]);
-            Assert.AreEqual(tree.Children[1].Children[0].Token, tokens[3]);
-            Assert.AreEqual(tree.Children[1].Children[1].Token, tokens[5]);
+            var children = tree.Children.ToList();
+            Assert.AreEqual(children[0].Token, tokens[0]);
+            Assert.AreEqual(children[1].Token, tokens[4]);
+            var rightGrandchildren = children[1].Children.ToList();
+            Assert.AreEqual(rightGrandchildren[0].Token, tokens[3]);
+            Assert.AreEqual(rightGrandchildren[1].Token, tokens[5]);
             
             validator.VerifyAllExpectations();
         }
@@ -94,10 +97,12 @@ namespace ConsoleCalculator.Tests
             var tree = builder.Build(tokens);
 
             Assert.AreEqual(tree.Token, tokens[1]);
-            Assert.AreEqual(tree.Children[0].Token, tokens[0]);
-            Assert.AreEqual(tree.Children[1].Token, tokens[3]);
-            Assert.AreEqual(tree.Children[1].Children[0].Token, tokens[2]);
-            Assert.AreEqual(tree.Children[1].Children[1].Token, tokens[4]);
+            var children = tree.Children.ToList();
+            Assert.AreEqual(children[0].Token, tokens[0]);
+            Assert.AreEqual(children[1].Token, tokens[3]);
+            var rightGrandchildren = children[1].Children.ToList();
+            Assert.AreEqual(rightGrandchildren[0].Token, tokens[2]);
+            Assert.AreEqual(rightGrandchildren[1].Token, tokens[4]);
         }
 
         [Test]
@@ -117,10 +122,12 @@ namespace ConsoleCalculator.Tests
             var tree = builder.Build(tokens);
 
             Assert.AreEqual(tree.Token, tokens[3]);
-            Assert.AreEqual(tree.Children[0].Token, tokens[1]);
-            Assert.AreEqual(tree.Children[1].Token, tokens[4]);
-            Assert.AreEqual(tree.Children[0].Children[0].Token, tokens[0]);
-            Assert.AreEqual(tree.Children[0].Children[1].Token, tokens[2]);
+            var children = tree.Children.ToList();
+            Assert.AreEqual(children[0].Token, tokens[1]);
+            Assert.AreEqual(children[1].Token, tokens[4]);
+            var rightGrandchildren = children[0].Children.ToList();
+            Assert.AreEqual(rightGrandchildren[0].Token, tokens[0]);
+            Assert.AreEqual(rightGrandchildren[1].Token, tokens[2]);
         }
 
         [Test]
@@ -144,8 +151,9 @@ namespace ConsoleCalculator.Tests
             var tree = builder.Build(tokens);
 
             Assert.AreEqual(tree.Token, tokens[3]);
-            Assert.AreEqual(tree.Children[0].Token, tokens[1]);
-            Assert.AreEqual(tree.Children[1].Token, tokens[5]);
+            var children = tree.Children.ToList();
+            Assert.AreEqual(children[0].Token, tokens[1]);
+            Assert.AreEqual(children[1].Token, tokens[5]);
 
             validator.VerifyAllExpectations();
         }
