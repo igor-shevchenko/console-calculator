@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleCalculator.Operations
 {
@@ -12,26 +14,24 @@ namespace ConsoleCalculator.Operations
             if (cachedBinaryOperators != null)
                 return cachedBinaryOperators;
 
-            cachedBinaryOperators = new IBinaryOperator[]
-                                    {
-                                        new AdditionOperator(),
-                                        new DivisionOperator(),
-                                        new MultiplicationOperator(), 
-                                        new SubtractionOperator(),
-                                    };
+            cachedBinaryOperators = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t => typeof (IBinaryOperator).IsAssignableFrom(t) && !t.IsInterface)
+                .Select(t => (IBinaryOperator) Activator.CreateInstance(t))
+                .ToList();
             return cachedBinaryOperators;
-
         }
 
         public IList<IUnaryOperator> GetUnaryOperators()
         {
             if (cachedUnaryOperators != null)
                 return cachedUnaryOperators;
-            
-            cachedUnaryOperators = new IUnaryOperator[]
-                                   {
-                                       new NegationOperator(),
-                                   };
+
+            cachedUnaryOperators = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t => typeof(IUnaryOperator).IsAssignableFrom(t) && !t.IsInterface)
+                .Select(t => (IUnaryOperator)Activator.CreateInstance(t))
+                .ToList();
             return cachedUnaryOperators;
         } 
     }
