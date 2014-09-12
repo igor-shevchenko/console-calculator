@@ -27,13 +27,16 @@ namespace ConsoleCalculator.Tree
                 return null;
             if (IsExpressionInBrackets(tokens))
             {
+                // ≈сли всЄ выражение в скобках, то просто отбросим их.
                 return Build(tokens.Skip(1).Take(tokens.Count - 2).ToList());
             }
             if (IsExpressionASingleValue(tokens))
             {
+                // ≈сли выражение состоит из единственного значени€, то возвращаетс€ узел дерева с этим значением.
                 return new ExpressionTree(tokens[0], null);
             }
 
+            // ¬ остальных случа€х находитс€ наименее приоритетный оператор, по которому выражение разбиваетс€ на две части.
             var index = GetIndexOfOperatorWithLowestPrecedence(tokens);
             
             var leftchild = Build(tokens.Take(index).ToList());
@@ -55,7 +58,7 @@ namespace ConsoleCalculator.Tree
                 return false;
             var startsWithOpeningBracket = tokens[0].Type == TokenType.OpeningBracket;
             var endsWithClosingBracket = tokens[count - 1].Type == TokenType.ClosingBracket;
-            return startsWithOpeningBracket && endsWithClosingBracket && bracketValidator.IsValid(tokens.Skip(1).Take(tokens.Count - 2).ToList());
+            return startsWithOpeningBracket && endsWithClosingBracket && bracketValidator.IsValid(tokens.Skip(1).Take(count - 2).ToList());
         }
 
         private bool IsExpressionASingleValue(IList<Token> tokens)
@@ -66,7 +69,9 @@ namespace ConsoleCalculator.Tree
         private int GetIndexOfOperatorWithLowestPrecedence(IList<Token> tokens)
         {
             var leastIndex = -1;
-            var bracketDepth = 0;
+
+            // ¬нутри скобок операторы искать не надо, поэтому будем считать, насколько глубоко мы внутри скобок.
+            var bracketDepth = 0; 
             for (var i = 0; i < tokens.Count; ++i)
             {
                 var token = tokens[i];
