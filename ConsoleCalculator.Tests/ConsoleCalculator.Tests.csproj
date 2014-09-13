@@ -84,6 +84,10 @@
     <Compile Include="TokenTypeIdentifierTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleCalculator.MyOperators\ConsoleCalculator.MyOperators.csproj">
+      <Project>{53c43863-3bc1-4f40-85c4-c4be8353e8d6}</Project>
+      <Name>ConsoleCalculator.MyOperators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConsoleCalculator.OperatorContracts\ConsoleCalculator.OperatorContracts.csproj">
       <Project>{c16c4365-b92f-424f-ba9e-e6c3be3ae765}</Project>
       <Name>ConsoleCalculator.OperatorContracts</Name>

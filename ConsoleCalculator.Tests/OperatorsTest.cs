@@ -1,3 +1,4 @@
+using ConsoleCalculator.MyOperators;
 using ConsoleCalculator.Operations;
 using NUnit.Framework;
 

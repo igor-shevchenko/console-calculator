@@ -77,12 +77,7 @@
     <Compile Include="Tree\ExpressionTreeBuilder.cs" />
     <Compile Include="Tree\IExpressionTree.cs" />
     <Compile Include="Tokens\Tokenizer.cs" />
-    <Compile Include="Operations\AdditionOperator.cs" />
-    <Compile Include="Operations\DivisionOperator.cs" />
     <Compile Include="ISplitter.cs" />
-    <Compile Include="Operations\MultiplicationOperator.cs" />
-    <Compile Include="Operations\NegationOperator.cs" />
-    <Compile Include="Operations\SubtractionOperator.cs" />
     <Compile Include="OperatorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

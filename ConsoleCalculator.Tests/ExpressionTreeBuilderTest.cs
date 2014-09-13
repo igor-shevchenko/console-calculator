@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleCalculator.MyOperators;
 using ConsoleCalculator.Operations;
 using ConsoleCalculator.Tokens;
 using ConsoleCalculator.Tree;

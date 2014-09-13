@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConsoleCalculator.Operations;
+using ConsoleCalculator.OperatorContracts;
 using ConsoleCalculator.Tokens;
 using NUnit.Framework;
 using Rhino.Mocks;

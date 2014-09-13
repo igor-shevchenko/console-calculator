@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ConsoleCalculator.Operations;
+using ConsoleCalculator.OperatorContracts;
 using NUnit.Framework;
 using Rhino.Mocks;
 
