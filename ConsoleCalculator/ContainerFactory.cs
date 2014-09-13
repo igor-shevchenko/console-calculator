@@ -24,6 +24,7 @@ namespace ConsoleCalculator
             container.Register(Component.For<ITokenTypeIdentifier>().ImplementedBy<TokenTypeIdentifier>());
             container.Register(Component.For<IBracketValidator>().ImplementedBy<BracketValidator>());
             container.Register(Component.For<ITokenBuilder>().ImplementedBy<TokenBuilder>());
+            container.Register(Component.For<IOperatorLoader>().ImplementedBy<OperatorLoader>());
             
             return container;
         }

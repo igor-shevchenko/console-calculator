@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Operations\IOperatorLoader.cs" />
+    <Compile Include="Operations\OperatorLoader.cs" />
     <Compile Include="Tokens\Bracket.cs" />
     <Compile Include="Detectors\BracketSignDetector.cs" />
     <Compile Include="BracketValidator.cs" />

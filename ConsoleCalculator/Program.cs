@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using ConsoleCalculator.Operations;
 
 namespace ConsoleCalculator
 {
@@ -13,6 +14,9 @@ namespace ConsoleCalculator
         {
             using (var container = new ContainerFactory().GetContainer())
             {
+                var operatorLoader = container.Resolve<IOperatorLoader>();
+                operatorLoader.Load();
+
                 var calculator = container.Resolve<ICalculator>();
                 const string prompt = "> ";
                 Console.WriteLine("Type expression (e.g. \"1+2\") for calculation or \"exit\" for exit");
