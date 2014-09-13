@@ -136,7 +136,7 @@ namespace ConsoleCalculator.Tests
         }
 
         [Test]
-        public void TestBuildWithWrongOuterBrackets()
+        public void TestBuildWithOuterBrackets()
         {
             var validator = MockRepository.GenerateMock<IBracketValidator>();
             var tokens = new List<Token>
