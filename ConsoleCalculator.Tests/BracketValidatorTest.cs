@@ -51,7 +51,7 @@ namespace ConsoleCalculator.Tests
         }
 
         [Test]
-        public void TestNotValidateSwitchedBracket()
+        public void TestNotValidateSwitchedBrackets()
         {
             var op = MockRepository.GenerateStub<IBinaryOperator>();
             var invalidTokens = new List<Token>
