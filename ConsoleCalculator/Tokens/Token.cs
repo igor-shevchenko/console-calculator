@@ -1,5 +1,6 @@
 using System;
 using ConsoleCalculator.Operations;
+using ConsoleCalculator.OperatorContracts;
 
 namespace ConsoleCalculator.Tokens
 {

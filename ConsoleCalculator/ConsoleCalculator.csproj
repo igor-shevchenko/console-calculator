@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Operations\IOperator.cs" />
     <Compile Include="Tokens\Bracket.cs" />
     <Compile Include="Detectors\BracketSignDetector.cs" />
     <Compile Include="BracketValidator.cs" />
@@ -80,9 +79,7 @@
     <Compile Include="Tokens\Tokenizer.cs" />
     <Compile Include="Operations\AdditionOperator.cs" />
     <Compile Include="Operations\DivisionOperator.cs" />
-    <Compile Include="Operations\IBinaryOperator.cs" />
     <Compile Include="ISplitter.cs" />
-    <Compile Include="Operations\IUnaryOperator.cs" />
     <Compile Include="Operations\MultiplicationOperator.cs" />
     <Compile Include="Operations\NegationOperator.cs" />
     <Compile Include="Operations\SubtractionOperator.cs" />
@@ -96,6 +93,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleCalculator.OperatorContracts\ConsoleCalculator.OperatorContracts.csproj">
+      <Project>{c16c4365-b92f-424f-ba9e-e6c3be3ae765}</Project>
+      <Name>ConsoleCalculator.OperatorContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

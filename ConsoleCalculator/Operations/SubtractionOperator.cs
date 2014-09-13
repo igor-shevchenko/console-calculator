@@ -1,3 +1,5 @@
+using ConsoleCalculator.OperatorContracts;
+
 namespace ConsoleCalculator.Operations
 {
     public class SubtractionOperator : IBinaryOperator

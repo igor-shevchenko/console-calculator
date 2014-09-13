@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ConsoleCalculator.OperatorContracts;
 
 namespace ConsoleCalculator.Operations
 {
