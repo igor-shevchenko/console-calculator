@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleCalculator.MyOperators;
-using ConsoleCalculator.Operations;
+using ConsoleCalculator.OperatorContracts;
 using ConsoleCalculator.Tokens;
 using ConsoleCalculator.Tree;
 using NUnit.Framework;
@@ -20,7 +18,7 @@ namespace ConsoleCalculator.Tests
             var tokens = new List<Token>
                              {
                                  new Token(1),
-                                 new Token(new AdditionOperator()),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(2)
                              };
             var builder = new ExpressionTreeBuilder(validator);
@@ -39,7 +37,7 @@ namespace ConsoleCalculator.Tests
             var validator = MockRepository.GenerateStub<IBracketValidator>();
             var tokens = new List<Token>
                              {
-                                 new Token(new NegationOperator()),
+                                 new Token(MockRepository.GenerateStub<IUnaryOperator>()),
                                  new Token(1),
                              };
             var builder = new ExpressionTreeBuilder(validator);
@@ -57,10 +55,10 @@ namespace ConsoleCalculator.Tests
             var tokens = new List<Token>
                              {
                                  new Token(1),
-                                 new Token(new AdditionOperator()),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(Bracket.Opening),
                                  new Token(2),
-                                 new Token(new AdditionOperator()),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(3),
                                  new Token(Bracket.Closing),
                              };
@@ -85,12 +83,18 @@ namespace ConsoleCalculator.Tests
         public void TestBuildWithCorrectPrecedence()
         {
             var validator = MockRepository.GenerateStub<IBracketValidator>();
+            var operatorWithLowPriority = MockRepository.GenerateStub<IBinaryOperator>();
+            var operatorWithHighPriority = MockRepository.GenerateStub<IBinaryOperator>();
+            
+            operatorWithLowPriority.Expect(o => o.Precedence).Return(1);
+            operatorWithHighPriority.Expect(o => o.Precedence).Return(2);
+
             var tokens = new List<Token>
                              {
                                  new Token(1),
-                                 new Token(new AdditionOperator()),
+                                 new Token(operatorWithLowPriority),
                                  new Token(2),
-                                 new Token(new MultiplicationOperator()),
+                                 new Token(operatorWithHighPriority),
                                  new Token(3),
                              };
             var builder = new ExpressionTreeBuilder(validator);
@@ -113,9 +117,9 @@ namespace ConsoleCalculator.Tests
             var tokens = new List<Token>
                              {
                                  new Token(1),
-                                 new Token(new SubtractionOperator()),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(2),
-                                 new Token(new SubtractionOperator()),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(3),
                              };
             var builder = new ExpressionTreeBuilder(validator);
@@ -140,7 +144,7 @@ namespace ConsoleCalculator.Tests
                                  new Token(Bracket.Opening),
                                  new Token(1),
                                  new Token(Bracket.Closing),
-                                 new Token(new AdditionOperator()),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(Bracket.Opening),
                                  new Token(2),
                                  new Token(Bracket.Closing),
