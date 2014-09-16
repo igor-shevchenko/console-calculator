@@ -65,36 +65,22 @@
     <Compile Include="Tokenization\NumberRule.cs" />
     <Compile Include="Tokenization\UnaryOperatorRule.cs" />
     <Compile Include="Tokens\Bracket.cs" />
-    <Compile Include="Detectors\BracketSignDetector.cs" />
     <Compile Include="BracketValidator.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="ContainerFactory.cs" />
-    <Compile Include="Detectors\IBracketSignDetector.cs" />
     <Compile Include="IBracketValidator.cs" />
     <Compile Include="ICalculator.cs" />
     <Compile Include="IOperatorFactory.cs" />
-    <Compile Include="Detectors\IOperationSignDetector.cs" />
-    <Compile Include="Detectors\ISeparatorDetector.cs" />
-    <Compile Include="Tokens\ITokenBuilder.cs" />
-    <Compile Include="Tokens\ITokenizer.cs" />
-    <Compile Include="Tokens\ITokenTypeIdentifier.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />
-    <Compile Include="Detectors\OperationSignDetector.cs" />
-    <Compile Include="Detectors\SeparatorDetector.cs" />
-    <Compile Include="Tokens\TokenBuilder.cs" />
     <Compile Include="Tokens\TokenType.cs" />
-    <Compile Include="Tokens\TokenTypeIdentifier.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
     <Compile Include="Tree\ExpressionTreeBuilder.cs" />
     <Compile Include="Tree\IExpressionTree.cs" />
-    <Compile Include="Tokens\Tokenizer.cs" />
-    <Compile Include="ISplitter.cs" />
     <Compile Include="OperatorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokens\Token.cs" />
-    <Compile Include="Splitter.cs" />
     <Compile Include="Tree\IExpressionTreeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

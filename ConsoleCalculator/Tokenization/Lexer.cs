@@ -12,7 +12,7 @@ namespace ConsoleCalculator.Tokenization
 
         public Lexer(ILexerRuleListFactory ruleListFactory)
         {
-            this.rules = ruleListFactory.GetRules();
+            rules = ruleListFactory.GetRules();
         }
 
         public IEnumerable<Token> Tokenize(string s)

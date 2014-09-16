@@ -12,16 +12,12 @@ namespace ConsoleCalculator
     public class Calculator : ICalculator
     {
         private readonly ILexer lexer;
-        private readonly ISplitter splitter;
-        private readonly ITokenizer tokenizer;
         private readonly IExpressionTreeBuilder expressionTreeBuilder;
         private readonly IBracketValidator bracketValidator;
 
         public Calculator(ILexer lexer, IExpressionTreeBuilder expressionTreeBuilder, IBracketValidator bracketValidator)
         {
             this.lexer = lexer;
-            this.splitter = splitter;
-            this.tokenizer = tokenizer;
             this.expressionTreeBuilder = expressionTreeBuilder;
             this.bracketValidator = bracketValidator;
         }
