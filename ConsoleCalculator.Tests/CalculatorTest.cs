@@ -21,14 +21,12 @@ namespace ConsoleCalculator.Tests
             var lexer = MockRepository.GenerateMock<ILexer>();
             var builder = MockRepository.GenerateMock<IExpressionTreeBuilder>();
             var tree = MockRepository.GenerateMock<IExpressionTree>();
-            var validator = MockRepository.GenerateMock<IBracketValidator>();
 
             lexer.Expect(l => l.Tokenize(Arg<string>.Is.Equal(expression))).Return(tokens);
-            validator.Expect(v => v.IsValid(Arg<List<Token>>.Is.Equal(tokens))).Return(true);
             builder.Expect(b => b.Build(Arg<List<Token>>.Is.Equal(tokens))).Return(tree);
             tree.Expect(t => t.GetResult()).Return(value);
             
-            var calculator = new Calculator(lexer, builder, validator);
+            var calculator = new Calculator(lexer, builder);
 
             var result = calculator.Calculate(expression);
 
@@ -37,30 +35,6 @@ namespace ConsoleCalculator.Tests
             lexer.VerifyAllExpectations();
             builder.VerifyAllExpectations();
             tree.VerifyAllExpectations();
-            validator.VerifyAllExpectations();
-        }
-
-        [Test]
-        [ExpectedException]
-        public void TestCalculateWithInvalidBrackets()
-        {
-            var expression = String.Empty;
-            var tokens = new List<Token>();
-
-            var lexer = MockRepository.GenerateMock<ILexer>();
-            var builder = MockRepository.GenerateMock<IExpressionTreeBuilder>();
-            var validator = MockRepository.GenerateMock<IBracketValidator>();
-
-            lexer.Expect(l => l.Tokenize(Arg<string>.Is.Equal(expression))).Return(tokens);
-            validator.Expect(v => v.IsValid(Arg<List<Token>>.Is.Equal(tokens))).Return(false);
-
-            var calculator = new Calculator(lexer, builder, validator);
-
-            var result = calculator.Calculate(expression);
-
-            lexer.VerifyAllExpectations();
-            builder.VerifyAllExpectations();
-            validator.VerifyAllExpectations();
         }
     }
 }
