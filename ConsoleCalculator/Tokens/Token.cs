@@ -37,28 +37,28 @@ namespace ConsoleCalculator.Tokens
         public double GetValue()
         {
             if (Type != TokenType.Value)
-                throw new Exception();
+                throw new Exception(Type + " is not number");
             return (double) token;
         }
 
         public IBinaryOperator GetBinaryOperator()
         {
             if (Type != TokenType.BinaryOperator)
-                throw new Exception();
+                throw new Exception(Type + " is not binary operator");
             return (IBinaryOperator) token;
         }
 
         public IUnaryOperator GetUnaryOperator()
         {
             if (Type != TokenType.UnaryOperator)
-                throw new Exception();
+                throw new Exception(Type + " is not unary operator");
             return (IUnaryOperator) token;
         }
 
         public Bracket GetBracket()
         {
-            if (Type != TokenType.OpeningBracket || Type != TokenType.ClosingBracket)
-                throw new Exception();
+            if (Type != TokenType.OpeningBracket && Type != TokenType.ClosingBracket)
+                throw new Exception(Type + " is not bracket");
             return (Bracket) token;
         }
 
@@ -66,7 +66,7 @@ namespace ConsoleCalculator.Tokens
         {
             if (Type == TokenType.BinaryOperator || Type == TokenType.UnaryOperator)
                 return ((IOperator) token).Precedence;
-            throw new Exception();
+            throw new Exception(Type + " is not operator");
         }
     }
 }
