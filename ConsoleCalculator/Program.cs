@@ -31,9 +31,9 @@ namespace ConsoleCalculator
                         double result = calculator.Calculate(command);
                         Console.WriteLine(result);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Syntax error");
+                        Console.WriteLine(ex.Message);
                     }
                 }
             }
