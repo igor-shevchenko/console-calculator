@@ -13,7 +13,6 @@ namespace ConsoleCalculator
         {
             var container = new WindsorContainer();
             container.Register(Component.For<IExpressionTreeBuilder>().ImplementedBy<ExpressionTreeBuilder>());
-            container.Register(Component.For<IOperatorFactory>().ImplementedBy<OperatorFactory>());
             container.Register(Component.For<ICalculator>().ImplementedBy<Calculator>());
             container.Register(Component.For<IOperatorListFactory>().ImplementedBy<OperatorListFactory>());
             container.Register(Component.For<IBracketValidator>().ImplementedBy<BracketValidator>());

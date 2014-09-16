@@ -70,14 +70,12 @@
     <Compile Include="ContainerFactory.cs" />
     <Compile Include="IBracketValidator.cs" />
     <Compile Include="ICalculator.cs" />
-    <Compile Include="IOperatorFactory.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />
     <Compile Include="Tokens\TokenType.cs" />
     <Compile Include="Tree\ExpressionTree.cs" />
     <Compile Include="Tree\ExpressionTreeBuilder.cs" />
     <Compile Include="Tree\IExpressionTree.cs" />
-    <Compile Include="OperatorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokens\Token.cs" />
