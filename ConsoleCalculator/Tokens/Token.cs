@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using ConsoleCalculator.Operations;
 using ConsoleCalculator.OperatorContracts;
 
@@ -67,6 +68,25 @@ namespace ConsoleCalculator.Tokens
             if (Type == TokenType.BinaryOperator || Type == TokenType.UnaryOperator)
                 return ((IOperator) value).Precedence;
             throw new Exception(Type + " is not operator");
+        }
+
+        public override string ToString()
+        {
+            switch (Type)
+            {
+                case TokenType.Number:
+                    return ((double) value).ToString(CultureInfo.InvariantCulture);
+                case TokenType.BinaryOperator:
+                    return ((IBinaryOperator) value).Sign;
+                case TokenType.UnaryOperator:
+                    return ((IUnaryOperator)value).Sign;
+                case TokenType.OpeningBracket:
+                    return "(";
+                case TokenType.ClosingBracket:
+                    return ")";
+                default:
+                    throw new Exception("Unexpected token type");
+            }
         }
     }
 }

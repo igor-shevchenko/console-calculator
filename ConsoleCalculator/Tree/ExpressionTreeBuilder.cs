@@ -14,51 +14,53 @@ namespace ConsoleCalculator.Tree
     /// </summary>
     public class ExpressionTreeBuilder : IExpressionTreeBuilder
     {
-        private readonly IBracketValidator bracketValidator;
-
-        public ExpressionTreeBuilder(IBracketValidator bracketValidator)
-        {
-            this.bracketValidator = bracketValidator;
-        }
-
         public IExpressionTree Build(IList<Token> tokens)
         {
             if (tokens.Count == 0)
                 return null;
-            if (IsExpressionInBrackets(tokens))
-            {
-                // ≈сли всЄ выражение в скобках, то просто отбросим их.
-                return Build(tokens.Skip(1).Take(tokens.Count - 2).ToList());
-            }
+
             if (IsExpressionASingleValue(tokens))
             {
                 // ≈сли выражение состоит из единственного значени€, то возвращаетс€ узел дерева с этим значением.
                 return new ExpressionTree(tokens[0], null);
             }
 
-            // ¬ остальных случа€х находитс€ наименее приоритетный оператор, по которому выражение разбиваетс€ на две части.
+            // ѕопытаемс€ наименее приоритетный оператор, по которому выражение разбиваетс€ на две части.
             var index = GetIndexOfOperatorWithLowestPrecedence(tokens);
+
+            if (index != -1)
+            {
+                var leftchild = Build(tokens.Take(index).ToList());
+                var rightchild = Build(tokens.Skip(index + 1).ToList());
+
+                var children = new List<IExpressionTree>();
+                if (leftchild != null)
+                    children.Add(leftchild);
+                if (rightchild != null)
+                    children.Add(rightchild);
+
+                return new ExpressionTree(tokens[index], children);
+            }
+
+            // ≈сли всЄ выражение в скобках, то попытаемс€ отпарсить то, что внутри
+            if (IsExpressionInBrackets(tokens))
+            {
+                
+                return Build(tokens.Skip(1).Take(tokens.Count - 2).ToList());
+            }
+
+            throw new Exception("Can't parse: " + String.Join("", tokens.Select(t => t.ToString())));
             
-            var leftchild = Build(tokens.Take(index).ToList());
-            var rightchild = Build(tokens.Skip(index + 1).ToList());
-            
-            var children = new List<IExpressionTree>();
-            if (leftchild != null)
-                children.Add(leftchild);
-            if (rightchild != null)
-                children.Add(rightchild);
-            
-            return new ExpressionTree(tokens[index], children);
         }
 
         private bool IsExpressionInBrackets(IList<Token> tokens)
         {
             var count = tokens.Count;
-            if (count < 2)
-                return false;
+            if (count < 3)
+                return false; // ¬ыражение в скобках Ч как минимум три токена.
             var startsWithOpeningBracket = tokens[0].Type == TokenType.OpeningBracket;
             var endsWithClosingBracket = tokens[count - 1].Type == TokenType.ClosingBracket;
-            return startsWithOpeningBracket && endsWithClosingBracket && bracketValidator.IsValid(tokens.Skip(1).Take(count - 2).ToList());
+            return startsWithOpeningBracket && endsWithClosingBracket;
         }
 
         private bool IsExpressionASingleValue(IList<Token> tokens)
@@ -78,15 +80,15 @@ namespace ConsoleCalculator.Tree
                 if (token.Type == TokenType.OpeningBracket)
                 {
                     bracketDepth++;
-                    continue;
                 }
                 if (token.Type == TokenType.ClosingBracket)
                 {
                     bracketDepth--;
-                    continue;
                 }
                 if (bracketDepth > 0)
                     continue;
+                if (bracketDepth < 0) // ћы вышли из скобок больше раз, чем зашли в них.
+                    throw new Exception("Invalid use of brackets");
 
                 if (token.Type == TokenType.BinaryOperator || 
                     token.Type == TokenType.UnaryOperator)

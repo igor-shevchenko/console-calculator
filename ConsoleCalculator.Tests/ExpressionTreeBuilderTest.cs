@@ -14,14 +14,13 @@ namespace ConsoleCalculator.Tests
         [Test]
         public void TestBuildTree()
         {
-            var validator = MockRepository.GenerateStub<IBracketValidator>();
             var tokens = new List<Token>
                              {
                                  new Token(1),
                                  new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(2)
                              };
-            var builder = new ExpressionTreeBuilder(validator);
+            var builder = new ExpressionTreeBuilder();
 
             var tree = builder.Build(tokens);
 
@@ -34,13 +33,12 @@ namespace ConsoleCalculator.Tests
         [Test]
         public void TestBuildWithUnaryOperation()
         {
-            var validator = MockRepository.GenerateStub<IBracketValidator>();
             var tokens = new List<Token>
                              {
                                  new Token(MockRepository.GenerateStub<IUnaryOperator>()),
                                  new Token(1),
                              };
-            var builder = new ExpressionTreeBuilder(validator);
+            var builder = new ExpressionTreeBuilder();
 
             var tree = builder.Build(tokens);
 
@@ -51,7 +49,6 @@ namespace ConsoleCalculator.Tests
         [Test]
         public void TestBuildWithBrackets()
         {
-            var validator = MockRepository.GenerateMock<IBracketValidator>();
             var tokens = new List<Token>
                              {
                                  new Token(1),
@@ -63,8 +60,7 @@ namespace ConsoleCalculator.Tests
                                  new Token(Bracket.Closing),
                              };
 
-            validator.Expect(v => v.IsValid(Arg<IList<Token>>.Is.Anything)).Return(true);
-            var builder = new ExpressionTreeBuilder(validator);
+            var builder = new ExpressionTreeBuilder();
 
             var tree = builder.Build(tokens);
 
@@ -76,13 +72,11 @@ namespace ConsoleCalculator.Tests
             Assert.AreEqual(rightGrandchildren[0].Token, tokens[3]);
             Assert.AreEqual(rightGrandchildren[1].Token, tokens[5]);
             
-            validator.VerifyAllExpectations();
         }
 
         [Test]
         public void TestBuildWithCorrectPrecedence()
         {
-            var validator = MockRepository.GenerateStub<IBracketValidator>();
             var operatorWithLowPriority = MockRepository.GenerateStub<IBinaryOperator>();
             var operatorWithHighPriority = MockRepository.GenerateStub<IBinaryOperator>();
             
@@ -97,7 +91,7 @@ namespace ConsoleCalculator.Tests
                                  new Token(operatorWithHighPriority),
                                  new Token(3),
                              };
-            var builder = new ExpressionTreeBuilder(validator);
+            var builder = new ExpressionTreeBuilder();
 
             var tree = builder.Build(tokens);
 
@@ -113,7 +107,6 @@ namespace ConsoleCalculator.Tests
         [Test]
         public void TestBuildWithRightAssociativity()
         {
-            var validator = MockRepository.GenerateStub<IBracketValidator>();
             var tokens = new List<Token>
                              {
                                  new Token(1),
@@ -122,7 +115,7 @@ namespace ConsoleCalculator.Tests
                                  new Token(MockRepository.GenerateStub<IBinaryOperator>()),
                                  new Token(3),
                              };
-            var builder = new ExpressionTreeBuilder(validator);
+            var builder = new ExpressionTreeBuilder();
 
             var tree = builder.Build(tokens);
 
@@ -138,7 +131,6 @@ namespace ConsoleCalculator.Tests
         [Test]
         public void TestBuildWithOuterBrackets()
         {
-            var validator = MockRepository.GenerateMock<IBracketValidator>();
             var tokens = new List<Token>
                              {
                                  new Token(Bracket.Opening),
@@ -149,9 +141,7 @@ namespace ConsoleCalculator.Tests
                                  new Token(2),
                                  new Token(Bracket.Closing),
                              };
-            validator.Expect(v => v.IsValid(Arg<IList<Token>>.Is.Equal(tokens.Skip(1).Take(tokens.Count-2).ToList()))).Return(false);
-            validator.Expect(v => v.IsValid(Arg<IList<Token>>.Is.Anything)).Return(true);
-            var builder = new ExpressionTreeBuilder(validator);
+            var builder = new ExpressionTreeBuilder();
 
             var tree = builder.Build(tokens);
 
@@ -159,8 +149,6 @@ namespace ConsoleCalculator.Tests
             var children = tree.Children.ToList();
             Assert.AreEqual(children[0].Token, tokens[1]);
             Assert.AreEqual(children[1].Token, tokens[5]);
-
-            validator.VerifyAllExpectations();
         }
     }
 }

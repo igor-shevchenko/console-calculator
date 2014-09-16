@@ -38,7 +38,7 @@ namespace ConsoleCalculator.Tree
                 var rightChildResult = children[1].GetResult();
                 return operation.Apply(leftChildResult, rightChildResult);
             }
-            throw new Exception();
+            throw new Exception("Unexpected token type");
         }
     }
 }

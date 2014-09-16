@@ -65,10 +65,8 @@
     <Compile Include="Tokenization\NumberRule.cs" />
     <Compile Include="Tokenization\UnaryOperatorRule.cs" />
     <Compile Include="Tokens\Bracket.cs" />
-    <Compile Include="BracketValidator.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="ContainerFactory.cs" />
-    <Compile Include="IBracketValidator.cs" />
     <Compile Include="ICalculator.cs" />
     <Compile Include="Operations\IOperatorListFactory.cs" />
     <Compile Include="Operations\OperatorListFactory.cs" />

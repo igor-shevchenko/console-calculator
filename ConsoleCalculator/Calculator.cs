@@ -13,20 +13,16 @@ namespace ConsoleCalculator
     {
         private readonly ILexer lexer;
         private readonly IExpressionTreeBuilder expressionTreeBuilder;
-        private readonly IBracketValidator bracketValidator;
 
-        public Calculator(ILexer lexer, IExpressionTreeBuilder expressionTreeBuilder, IBracketValidator bracketValidator)
+        public Calculator(ILexer lexer, IExpressionTreeBuilder expressionTreeBuilder)
         {
             this.lexer = lexer;
             this.expressionTreeBuilder = expressionTreeBuilder;
-            this.bracketValidator = bracketValidator;
         }
 
         public double Calculate(string s)
         {
             var tokens = lexer.Tokenize(s).ToList();
-            if (!bracketValidator.IsValid(tokens))
-                throw new Exception("Bracket error");
             var expressionTree = expressionTreeBuilder.Build(tokens);
             return expressionTree.GetResult();
         }
