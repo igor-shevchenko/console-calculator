@@ -6,30 +6,30 @@ namespace ConsoleCalculator.Tokens
 {
     public class Token
     {
-        private readonly object token;
+        private readonly object value;
         public readonly TokenType Type;
 
         public Token(double value)
         {
-            token = value;
+            this.value = value;
             Type = TokenType.Number;
         }
 
         public Token(IBinaryOperator binaryOperator)
         {
-            token = binaryOperator;
+            value = binaryOperator;
             Type = TokenType.BinaryOperator;
         }
 
         public Token(IUnaryOperator unaryOperator)
         {
-            token = unaryOperator;
+            value = unaryOperator;
             Type = TokenType.UnaryOperator;
         }
 
         public Token(Bracket bracket)
         {
-            token = bracket;
+            value = bracket;
             Type = bracket == Bracket.Opening ? TokenType.OpeningBracket : TokenType.ClosingBracket;
         }
 
@@ -38,34 +38,34 @@ namespace ConsoleCalculator.Tokens
         {
             if (Type != TokenType.Number)
                 throw new Exception(Type + " is not number");
-            return (double) token;
+            return (double) value;
         }
 
         public IBinaryOperator GetBinaryOperator()
         {
             if (Type != TokenType.BinaryOperator)
                 throw new Exception(Type + " is not binary operator");
-            return (IBinaryOperator) token;
+            return (IBinaryOperator) value;
         }
 
         public IUnaryOperator GetUnaryOperator()
         {
             if (Type != TokenType.UnaryOperator)
                 throw new Exception(Type + " is not unary operator");
-            return (IUnaryOperator) token;
+            return (IUnaryOperator) value;
         }
 
         public Bracket GetBracket()
         {
             if (Type != TokenType.OpeningBracket && Type != TokenType.ClosingBracket)
                 throw new Exception(Type + " is not bracket");
-            return (Bracket) token;
+            return (Bracket) value;
         }
 
         public int GetOperatorPrecedence()
         {
             if (Type == TokenType.BinaryOperator || Type == TokenType.UnaryOperator)
-                return ((IOperator) token).Precedence;
+                return ((IOperator) value).Precedence;
             throw new Exception(Type + " is not operator");
         }
     }
