@@ -24,6 +24,8 @@ namespace ConsoleCalculator
                 {
                     Console.Write(prompt);
                     string command = Console.ReadLine();
+                    if (String.IsNullOrWhiteSpace(command))
+                        continue;
                     if (command == "exit")
                         break;
                     try
