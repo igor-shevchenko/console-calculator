@@ -20,12 +20,12 @@ namespace ConsoleCalculator.Tests
             var rule = new NumberRule();
             var validMatch = rule.GetMatch("2.58", 0, null);
             Assert.NotNull(validMatch);
-            Assert.AreEqual(2.58, validMatch.Token.GetValue());
+            Assert.AreEqual(2.58, validMatch.Token.GetNumber());
             Assert.AreEqual(4, validMatch.Length);
 
             var partialMatch = rule.GetMatch("2.58+7", 0, null);
             Assert.NotNull(partialMatch);
-            Assert.AreEqual(2.58, partialMatch.Token.GetValue());
+            Assert.AreEqual(2.58, partialMatch.Token.GetNumber());
             Assert.AreEqual(4, partialMatch.Length);
 
             var negativeMatch = rule.GetMatch("-2.58", 0, null);
@@ -33,7 +33,7 @@ namespace ConsoleCalculator.Tests
 
             var matchFromMiddle = rule.GetMatch("1+2.58", 2, null);
             Assert.NotNull(matchFromMiddle);
-            Assert.AreEqual(2.58, matchFromMiddle.Token.GetValue());
+            Assert.AreEqual(2.58, matchFromMiddle.Token.GetNumber());
             Assert.AreEqual(4, matchFromMiddle.Length);
 
 

@@ -34,7 +34,7 @@ namespace ConsoleCalculator.Tokens
         }
 
 
-        public double GetValue()
+        public double GetNumber()
         {
             if (Type != TokenType.Number)
                 throw new Exception(Type + " is not number");
