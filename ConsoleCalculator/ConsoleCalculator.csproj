@@ -54,6 +54,16 @@
   <ItemGroup>
     <Compile Include="Operations\IOperatorLoader.cs" />
     <Compile Include="Operations\OperatorLoader.cs" />
+    <Compile Include="Tokenization\BinaryOperatorRule.cs" />
+    <Compile Include="Tokenization\BracketRule.cs" />
+    <Compile Include="Tokenization\ILexer.cs" />
+    <Compile Include="Tokenization\ILexerRule.cs" />
+    <Compile Include="Tokenization\ILexerRuleListFactory.cs" />
+    <Compile Include="Tokenization\Lexer.cs" />
+    <Compile Include="Tokenization\LexerRuleListFactory.cs" />
+    <Compile Include="Tokenization\Match.cs" />
+    <Compile Include="Tokenization\NumberRule.cs" />
+    <Compile Include="Tokenization\UnaryOperatorRule.cs" />
     <Compile Include="Tokens\Bracket.cs" />
     <Compile Include="Detectors\BracketSignDetector.cs" />
     <Compile Include="BracketValidator.cs" />

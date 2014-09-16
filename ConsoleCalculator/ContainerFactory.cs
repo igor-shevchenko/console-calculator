@@ -2,6 +2,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using ConsoleCalculator.Detectors;
 using ConsoleCalculator.Operations;
+using ConsoleCalculator.Tokenization;
 using ConsoleCalculator.Tokens;
 using ConsoleCalculator.Tree;
 
@@ -25,7 +26,8 @@ namespace ConsoleCalculator
             container.Register(Component.For<IBracketValidator>().ImplementedBy<BracketValidator>());
             container.Register(Component.For<ITokenBuilder>().ImplementedBy<TokenBuilder>());
             container.Register(Component.For<IOperatorLoader>().ImplementedBy<OperatorLoader>());
-            
+            container.Register(Component.For<ILexer>().ImplementedBy<Lexer>());
+            container.Register(Component.For<ILexerRuleListFactory>().ImplementedBy<LexerRuleListFactory>());
             return container;
         }
     }

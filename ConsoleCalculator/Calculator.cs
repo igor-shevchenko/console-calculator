@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using ConsoleCalculator.Tokenization;
 using ConsoleCalculator.Tokens;
 using ConsoleCalculator.Tree;
 
@@ -9,13 +11,15 @@ namespace ConsoleCalculator
 {
     public class Calculator : ICalculator
     {
+        private readonly ILexer lexer;
         private readonly ISplitter splitter;
         private readonly ITokenizer tokenizer;
         private readonly IExpressionTreeBuilder expressionTreeBuilder;
         private readonly IBracketValidator bracketValidator;
 
-        public Calculator(ISplitter splitter, ITokenizer tokenizer, IExpressionTreeBuilder expressionTreeBuilder, IBracketValidator bracketValidator)
+        public Calculator(ILexer lexer, IExpressionTreeBuilder expressionTreeBuilder, IBracketValidator bracketValidator)
         {
+            this.lexer = lexer;
             this.splitter = splitter;
             this.tokenizer = tokenizer;
             this.expressionTreeBuilder = expressionTreeBuilder;
@@ -24,8 +28,7 @@ namespace ConsoleCalculator
 
         public double Calculate(string s)
         {
-            var splittedString = splitter.Split(s).ToList();
-            var tokens = tokenizer.Tokenize(splittedString).ToList();
+            var tokens = lexer.Tokenize(s).ToList();
             if (!bracketValidator.IsValid(tokens))
                 throw new Exception("Bracket error");
             var expressionTree = expressionTreeBuilder.Build(tokens);
