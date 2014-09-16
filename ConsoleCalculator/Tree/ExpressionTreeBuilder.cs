@@ -63,7 +63,7 @@ namespace ConsoleCalculator.Tree
 
         private bool IsExpressionASingleValue(IList<Token> tokens)
         {
-            return tokens.Count == 1 && tokens[0].Type == TokenType.Value;
+            return tokens.Count == 1 && tokens[0].Type == TokenType.Number;
         }
 
         private int GetIndexOfOperatorWithLowestPrecedence(IList<Token> tokens)

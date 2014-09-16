@@ -14,7 +14,7 @@ namespace ConsoleCalculator.Tokenization
 
         public Match GetMatch(string s, int pos, Token prevToken)
         {
-            if (prevToken == null || prevToken.Type != TokenType.Value && prevToken.Type != TokenType.ClosingBracket)
+            if (prevToken == null || prevToken.Type != TokenType.Number && prevToken.Type != TokenType.ClosingBracket)
             {
                 return null;
             }

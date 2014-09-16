@@ -12,7 +12,7 @@ namespace ConsoleCalculator.Tokens
         public Token(double value)
         {
             token = value;
-            Type = TokenType.Value;
+            Type = TokenType.Number;
         }
 
         public Token(IBinaryOperator binaryOperator)
@@ -36,7 +36,7 @@ namespace ConsoleCalculator.Tokens
 
         public double GetValue()
         {
-            if (Type != TokenType.Value)
+            if (Type != TokenType.Number)
                 throw new Exception(Type + " is not number");
             return (double) token;
         }

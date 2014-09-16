@@ -23,7 +23,7 @@ namespace ConsoleCalculator.Tree
 
         public double GetResult()
         {
-            if (Token.Type == TokenType.Value)
+            if (Token.Type == TokenType.Number)
                 return Token.GetValue();
             if (Token.Type == TokenType.UnaryOperator)
             {

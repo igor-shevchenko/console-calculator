@@ -2,7 +2,7 @@ namespace ConsoleCalculator.Tokens
 {
     public enum TokenType
     {
-        Value,
+        Number,
         BinaryOperator,
         UnaryOperator,
         OpeningBracket,
