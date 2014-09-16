@@ -150,5 +150,56 @@ namespace ConsoleCalculator.Tests
             Assert.AreEqual(children[0].Token, tokens[1]);
             Assert.AreEqual(children[1].Token, tokens[5]);
         }
+
+        [Test]
+        [ExpectedException]
+        public void TestRaiseExceptionWithInvalidBrackets()
+        {
+            var tokens = new List<Token>
+                             {
+                                 new Token(Bracket.Closing),
+                                 new Token(2),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
+                                 new Token(3),
+                                 new Token(Bracket.Opening),
+                             };
+
+            var builder = new ExpressionTreeBuilder();
+
+            var tree = builder.Build(tokens);
+        }
+
+        [Test]
+        [ExpectedException]
+        public void TestRaiseExceptionWithUnmatchedBrackets()
+        {
+            var tokens = new List<Token>
+                             {
+                                 new Token(Bracket.Opening),
+                                 new Token(2),
+                                 new Token(MockRepository.GenerateStub<IBinaryOperator>()),
+                                 new Token(3),
+                                 new Token(Bracket.Opening),
+                             };
+
+            var builder = new ExpressionTreeBuilder();
+
+            var tree = builder.Build(tokens);
+        }
+
+        [Test]
+        [ExpectedException]
+        public void TestRaiseExceptionWithEmptyBrackets()
+        {
+            var tokens = new List<Token>
+                             {
+                                 new Token(Bracket.Opening),
+                                 new Token(Bracket.Closing),
+                             };
+
+            var builder = new ExpressionTreeBuilder();
+
+            var tree = builder.Build(tokens);
+        }
     }
 }
